@@ -69,6 +69,8 @@ var shouty = {
 		Object.keys(Controllers).forEach(function (name) {
 			shoutyApp.controller(name, Controllers[name]);
 		});
+
+		shouty.run();
 	}
 };
 
