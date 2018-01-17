@@ -64,7 +64,7 @@ gulp.task("prepare", gulp.series("clean", "prepare:js"));
 
 gulp.task("rollup:browser", async() => {
 	const bundle = await rollup.rollup({
-		input: `${paths.src}/shouty.js`,
+		input: `${paths.src}/scripts/shouty.js`,
 		plugins: [
 			resolve(),
 			commonjs(),
@@ -84,7 +84,7 @@ gulp.task("rollup:browser", async() => {
 
 gulp.task("rollup:main", async() => {
 	const bundle = await rollup.rollup({
-		input: `${paths.src}/shouty.js`,
+		input: `${paths.src}/scripts/shouty.js`,
 		plugins: [
 			json({
 				preferConst: true
@@ -99,15 +99,18 @@ gulp.task("rollup:main", async() => {
 	});
 });
 
-gulp.task("babel", () => gulp.src(`${paths.src}/shouty.js`)
+gulp.task("babel", () => gulp.src(`${paths.src}/scripts/shouty.js`)
 	.pipe(babel({
 		compact: false,
 		presets: [
-			["env", {
-				targets: {
-					node: "0.12.18"
+			[
+				"env",
+				{
+					targets: {
+						node: "0.12.18"
+					}
 				}
-			}]
+			]
 		]
 
 	}))
@@ -132,13 +135,16 @@ gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
 	.pipe(sass({
 		outputStyle: "expanded",
 		precision: 10,
-		includePaths: ["./", "node_modules"]
+		includePaths: [
+			"./",
+			"node_modules"
+		]
 	}).on("error", sass.logError))
 	.pipe(sourcemaps.mapSources(sourcePath => `../src/${sourcePath}`))
 
 	.pipe(sourcemaps.write(".", {
 		charset: "utf-8",
-		mapFile: function(mapFilePath) {
+		mapFile(mapFilePath) {
 			return mapFilePath.replace("main", "shouty");
 		}
 	}))
@@ -157,7 +163,9 @@ gulp.task("autoprefixer", () => gulp.src(`${paths.tmp}/shouty.css`)
 		loadMaps: true
 	}))
 	.pipe(autoprefixer({
-		browsers: ["> 0.1%"],
+		browsers: [
+			"> 0.1%"
+		],
 		cascade: false
 	}))
 	.pipe(sourcemaps.write(".", {
@@ -237,7 +245,7 @@ gulp.task("server", () => {
 
 gulp.task("dev", gulp.series("dev:build", gulp.parallel("watch", "server")));
 
-gulp.task("default", gulp.series("build"));
+gulp.task("default", gulp.series("build", "commit:build"));
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
@@ -307,7 +315,10 @@ gulp.task("bump", (cb) => {
 		cwd: rootDir
 	});
 
-	const versionsToBump = _.map(["package.json", "bower.json"], fileName => rootDir + fileName);
+	const versionsToBump = _.map([
+		"package.json",
+		"bower.json"
+	], fileName => rootDir + fileName);
 
 	const commitMessage = `Build: Bumps version to v${newVersion}`;
 
@@ -322,7 +333,8 @@ gulp.task("bump", (cb) => {
 		}))
 		.pipe(git.commit(commitMessage, {
 			cwd: rootDir
-		})).on("end", () => {
+		}))
+		.on("end", () => {
 			git.push(
 				"origin", branch, {
 
@@ -365,7 +377,9 @@ gulp.task("push", (cb) => {
 	);
 });
 
-gulp.task("npm-publish", done => childProcess.spawn("npm", ["publish"], {
+gulp.task("npm-publish", done => childProcess.spawn("npm", [
+	"publish"
+], {
 	stdio: "inherit"
 }).on("close", done));
 
