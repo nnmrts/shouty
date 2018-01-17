@@ -1,14 +1,12 @@
 const express = require("express");
-const shouty = require("./shouty.js");
 
 const app = express();
 
 app.use(express.static("./"));
 
-app.get("/", (req, res) => {
-	console.log(req);
-	shouty.init();
-	res.sendFile(`${__dirname}index.html`);
+app.post("send", (req, res) => {
+	console.log(res);
+	console.log("SENT MESSAGE");
 });
 
 app.listen(9000, () => {
