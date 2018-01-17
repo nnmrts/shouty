@@ -21,6 +21,9 @@
 	},
 	"homepage": "https://github.com/nnmrts/shouty#readme",
 	"devDependencies": {
+		"babel-core": "^6.26.0",
+		"babel-plugin-angularjs-annotate": "^0.8.2",
+		"babel-preset-env": "^1.6.1",
 		"child_process": "^1.0.2",
 		"del": "^3.0.0",
 		"eslint": "^4.15.0",
