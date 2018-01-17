@@ -82,23 +82,6 @@ gulp.task("rollup:browser", async() => {
 	});
 });
 
-gulp.task("rollup:main", async() => {
-	const bundle = await rollup.rollup({
-		input: `${paths.src}/scripts/shouty.js`,
-		plugins: [
-			json({
-				preferConst: true
-			})
-		]
-	});
-
-	await bundle.write({
-		file: pkg.main,
-		format: "cjs",
-		name: _.camelCase(pkg.name)
-	});
-});
-
 gulp.task("babel", () => gulp.src(`${paths.dist}/shouty.js`)
 	.pipe(babel({
 		compact: false,
@@ -107,7 +90,7 @@ gulp.task("babel", () => gulp.src(`${paths.dist}/shouty.js`)
 				"env",
 				{
 					targets: {
-						node: "9.3.0"
+						browsers: ">0.01%"
 					}
 				}
 			]
@@ -125,8 +108,8 @@ gulp.task("minify:js", () =>
 
 gulp.task("server.js", () => gulp.src(`${paths.src}/scripts/server.js`).pipe(gulp.dest(paths.dist)));
 
-gulp.task("build:js", gulp.series(gulp.parallel(gulp.series("rollup:main", "babel"), "server.js")));
-gulp.task("dev:build:js", gulp.parallel(gulp.series("rollup:browser", "babel"), "rollup:main"));
+gulp.task("build:js", gulp.series(gulp.parallel(gulp.series("rollup:browser", "babel"), "server.js")));
+gulp.task("dev:build:js", gulp.series("rollup:browser", "babel"));
 
 gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
 	.pipe(sourcemaps.init({
