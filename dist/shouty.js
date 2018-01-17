@@ -70,6 +70,8 @@ var shouty = {
 			shoutyApp.controller(name, Controllers[name]);
 		});
 
+		console.log(shouty);
+
 		shouty.run();
 	}
 };
