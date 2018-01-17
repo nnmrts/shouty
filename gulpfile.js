@@ -194,7 +194,7 @@ gulp.task("build:css", gulp.series(
 
 gulp.task("dev:build:css", gulp.series("sass", "rename", "autoprefixer"));
 
-gulp.task("beautify:html", () => gulp.src("./index.html")
+gulp.task("beautify:html", () => gulp.src(`${paths.src}/index.html`)
 	.pipe(htmlbeautify())
 	.pipe(gulp.dest(paths.dist)));
 
@@ -244,8 +244,6 @@ gulp.task("server", () => {
 });
 
 gulp.task("dev", gulp.series("dev:build", gulp.parallel("watch", "server")));
-
-gulp.task("default", gulp.series("build", "commit:build"));
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
@@ -443,3 +441,6 @@ nodeCleanup((exitCode, signal) => {
 	ctrl_C: "{^C}",
 	uncaughtException: "Uh oh. Look what happened:"
 });
+
+
+gulp.task("default", gulp.series("build", "commit:build"));
