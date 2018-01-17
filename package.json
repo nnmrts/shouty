@@ -2,7 +2,8 @@
 	"name": "shouty",
 	"private": true,
 	"version": "0.1.0",
-	"main": "dist/shouty.js",
+	"main": "dist/server.js",
+	"browser": "dist/shouty.js",
 	"engines": {
 		"node": ">=0.10.0"
 	},
