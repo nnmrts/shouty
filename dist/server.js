@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.static("./"));
 
-app.get("/", (req, res) => {
+app.get("", (req, res) => {
 	console.log(req);
 	shouty.init();
 	res.sendFile(`${__dirname}index.html`);
