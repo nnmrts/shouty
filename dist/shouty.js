@@ -1,71 +1,75 @@
-'use strict';
+"use strict";
 
-/**
- * @ngdoc function
- * @name StartCtrl
- * @description
- * @param {any} $scope angular scope
- * @ngInject
- */
+var shouty = function () {
+	'use strict';
 
-var StartCtrl = function StartCtrl($scope) {
-	$scope.name = "start";
+	/**
+  * @ngdoc function
+  * @name StartCtrl
+  * @description
+  * @param {any} $scope angular scope
+  * @ngInject
+  */
 
-	window[$scope.name + "Scope"] = $scope;
-};
+	var StartCtrl = function StartCtrl($scope) {
+		$scope.name = "start";
 
-/**
- * @ngdoc function
- * @name LoginCtrl
- * @description
- * @param {any} $scope angular scope
- * @ngInject
- */
-var LoginCtrl = function LoginCtrl($scope) {
-	$scope.name = "login";
-
-	window[$scope.name + "Scope"] = $scope;
-};
-
-var Controllers = {
-	StartCtrl: StartCtrl,
-	LoginCtrl: LoginCtrl
-};
-
-/**
- * @name shoutyApp
- * @description
- * # shoutyApp
- *
- * Main module of the application.
- */
-var shoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
-	var startState = {
-		name: "start",
-		url: "/",
-		templateUrl: "./views/start.html",
-		controller: "StartCtrl"
-	};
-	var loginState = {
-		name: "login",
-		url: "/login",
-		templateUrl: "./views/login.html",
-		controller: "LoginCtrl"
+		window[$scope.name + "Scope"] = $scope;
 	};
 
-	$stateProvider.state(startState);
-	$stateProvider.state(loginState);
+	/**
+  * @ngdoc function
+  * @name LoginCtrl
+  * @description
+  * @param {any} $scope angular scope
+  * @ngInject
+  */
+	var LoginCtrl = function LoginCtrl($scope) {
+		$scope.name = "login";
 
-	$urlRouterProvider.otherwise("/");
+		window[$scope.name + "Scope"] = $scope;
+	};
 
-	$locationProvider.html5Mode({
-		enabled: true,
-		requireBase: false
+	var Controllers = {
+		StartCtrl: StartCtrl,
+		LoginCtrl: LoginCtrl
+	};
+
+	/**
+  * @name shoutyApp
+  * @description
+  * # shoutyApp
+  *
+  * Main module of the application.
+  */
+	var shoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
+		var startState = {
+			name: "start",
+			url: "/",
+			templateUrl: "./views/start.html",
+			controller: "StartCtrl"
+		};
+		var loginState = {
+			name: "login",
+			url: "/login",
+			templateUrl: "./views/login.html",
+			controller: "LoginCtrl"
+		};
+
+		$stateProvider.state(startState);
+		$stateProvider.state(loginState);
+
+		$urlRouterProvider.otherwise("/");
+
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
+		});
+	}]);
+
+	Object.keys(Controllers).forEach(function (name) {
+		shoutyApp.controller(name, Controllers[name]);
 	});
-}]);
 
-Object.keys(Controllers).forEach(function (name) {
-	shoutyApp.controller(name, Controllers[name]);
-});
-
-module.exports = shoutyApp;
+	return shoutyApp;
+}();
