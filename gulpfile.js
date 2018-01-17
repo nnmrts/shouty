@@ -99,7 +99,7 @@ gulp.task("rollup:main", async() => {
 	});
 });
 
-gulp.task("babel", () => gulp.src(`${paths.src}/scripts/shouty.js`)
+gulp.task("babel", () => gulp.src(`${paths.dist}/shouty.js`)
 	.pipe(babel({
 		compact: false,
 		presets: [
@@ -107,7 +107,7 @@ gulp.task("babel", () => gulp.src(`${paths.src}/scripts/shouty.js`)
 				"env",
 				{
 					targets: {
-						node: "0.12.18"
+						node: "9.3.0"
 					}
 				}
 			]
@@ -123,9 +123,9 @@ gulp.task("minify:js", () =>
 		}))
 		.pipe(gulp.dest(pkg.browser.replace("/shouty.js", ""))));
 
-gulp.task("server.js", () => gulp.src(`${paths.src}/server.js`).pipe(gulp.dest(paths.dist)));
+gulp.task("server.js", () => gulp.src(`${paths.src}/scripts/server.js`).pipe(gulp.dest(paths.dist)));
 
-gulp.task("build:js", gulp.series(gulp.parallel("rollup:main", "server.js")));
+gulp.task("build:js", gulp.series(gulp.parallel(gulp.series("rollup:main", "babel"), "server.js")));
 gulp.task("dev:build:js", gulp.parallel(gulp.series("rollup:browser", "babel"), "rollup:main"));
 
 gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
