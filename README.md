@@ -1,0 +1,3 @@
+# shouty
+
+Example shoutbox application

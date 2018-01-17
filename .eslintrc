@@ -1,0 +1,173 @@
+{
+	"extends": "airbnb-base",
+	"env": {
+		"browser": true
+	},
+	"globals": {
+		"angular": true
+	},
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"rules": {
+		"no-tabs": "off",
+		"quotes": [
+			"error",
+			"double"
+		],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"comma-dangle": "off",
+		"linebreak-style": "off",
+		"import/extensions": "off",
+		"space-before-function-paren": [
+			"error",
+			"never"
+		],
+		"brace-style": [
+			"error",
+			"stroustrup"
+		],
+		"no-plusplus": [
+			"error",
+			{
+				"allowForLoopAfterthoughts": true
+			}
+		],
+		"no-await-in-loop": "off",
+		"func-names": [
+			"error",
+			"never"
+		],
+		"no-param-reassign": [
+			"error",
+			{
+				"props": false
+			}
+		],
+		"prefer-destructuring": "off",
+		"object-shorthand": [
+			"error",
+			"always"
+		],
+		"function-paren-newline": [
+			"error",
+			"consistent"
+		],
+		"complexity": [
+			"error",
+			20
+		],
+		"max-params": [
+			"error",
+			6
+		],
+		"max-depth": [
+			"error",
+			4
+		],
+		"curly": [
+			"error",
+			"all"
+		],
+		"object-curly-newline": [
+			"error",
+			{
+				"ObjectExpression": {
+					"multiline": true,
+					"minProperties": 1
+				},
+				"ObjectPattern": {
+					"multiline": true,
+					"minProperties": 1
+				}
+			}
+		],
+		"object-property-newline": [
+			"error",
+			{
+				"allowMultiplePropertiesPerLine": false
+			}
+		],
+		"require-jsdoc": [
+			"error",
+			{
+				"require": {
+					"FunctionDeclaration": true,
+					"MethodDefinition": true,
+					"ClassDeclaration": true,
+					"ArrowFunctionExpression": true
+				}
+			}
+		],
+		"valid-jsdoc": [
+			"error",
+			{
+				"prefer": {
+					"arg": "param",
+					"argument": "param",
+					"return": "returns"
+				},
+				"preferType": {
+					"Boolean": "boolean",
+					"Number": "number",
+					"String": "string"
+				},
+				"requireReturn": false,
+				"requireReturnType": true,
+				"matchDescription": "(.*?)",
+				"requireParamDescription": true,
+				"requireReturnDescription": true
+			}
+		],
+		"no-cond-assign": [
+			"error",
+			"except-parens"
+		],
+		"strict": "off",
+		"max-len": [
+			"error",
+			{
+				"code": 100,
+				"comments": 80,
+				"ignoreStrings": true,
+				"ignoreTemplateLiterals": true,
+				"ignoreRegExpLiterals": true,
+				"ignoreUrls": true,
+				"tabWidth": 4
+			}
+		],
+		"max-nested-callbacks": [
+			"error",
+			10
+		],
+		"newline-per-chained-call": [
+			"error",
+			{
+				"ignoreChainWithDepth": 3
+			}
+		],
+		"space-before-blocks": [
+			"error",
+			"always"
+		],
+		"wrap-regex": [
+			"error"
+		],
+		"array-element-newline": [
+			"error",
+			"always"
+		],
+		"array-bracket-newline": [
+			"error",
+			{
+				"minItems": 1
+			}
+		]
+	}
+}

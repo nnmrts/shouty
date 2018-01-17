@@ -1,0 +1,19 @@
+{
+	"presets": [
+		[
+			"env",
+			{
+				"targets": {
+					"browsers": [
+						"> 0.1%"
+					]
+				}
+			}
+		]
+	],
+	"plugins": [
+		[
+			"angularjs-annotate"
+		]
+	]
+}

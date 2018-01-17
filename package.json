@@ -1,0 +1,58 @@
+{
+	"name": "shouty",
+	"private": true,
+	"version": "0.1.0",
+	"main": "dist/shouty.js",
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"description": "Example shoutbox application",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nnmrts/shouty.git"
+	},
+	"keywords": [
+		"shoutbox"
+	],
+	"author": "Nano Miratus <nanomiratus@gmail.com>",
+	"license": "Unlicense",
+	"bugs": {
+		"url": "https://github.com/nnmrts/shouty/issues"
+	},
+	"homepage": "https://github.com/nnmrts/shouty#readme",
+	"devDependencies": {
+		"child_process": "^1.0.2",
+		"del": "^3.0.0",
+		"eslint": "^4.15.0",
+		"eslint-config-airbnb-base": "^12.1.0",
+		"eslint-plugin-import": "^2.8.0",
+		"github-api": "^3.0.0",
+		"gulp": "github:gulpjs/gulp#4.0",
+		"gulp-autoprefixer": "^4.1.0",
+		"gulp-babel": "^7.0.0",
+		"gulp-clean-css": "^3.9.2",
+		"gulp-eslint": "^4.0.1",
+		"gulp-git": "^2.5.1",
+		"gulp-html-beautify": "^1.0.1",
+		"gulp-json-editor": "^2.2.1",
+		"gulp-rename": "^1.2.2",
+		"gulp-sass": "^3.1.0",
+		"gulp-sourcemaps": "^2.6.3",
+		"gulp-total-task-time": "^0.1.0",
+		"gulp-uglify": "^3.0.0",
+		"gulp-util": "^3.0.8",
+		"live-server": "^1.2.0",
+		"lodash": "^4.17.4",
+		"node-cleanup": "^2.1.2",
+		"rollup": "^0.54.1",
+		"rollup-plugin-commonjs": "^8.2.6",
+		"rollup-plugin-json": "^2.3.0",
+		"rollup-plugin-node-resolve": "^3.0.2",
+		"semver": "^5.5.0",
+		"vinyl-paths": "^2.1.0",
+		"yargs": "^10.1.1"
+	},
+	"dependencies": {
+		"express": "^4.16.2"
+	}
+}
