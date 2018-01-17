@@ -16,7 +16,7 @@
     <div id="header">
         <h1>shouty</h1>
         <nav ng-controller="NavCtrl as nav">
-            <a ng-repeat="link in links" ng-href="link">{{link | uppercase}}</a>
+            <a ng-repeat="link in links" ng-href="{{link}}">{{link | uppercase}}</a>
         </nav>
     </div>
 
