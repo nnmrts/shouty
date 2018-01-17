@@ -1,11 +1,13 @@
 const express = require("express");
-require("./shouty.js");
+const shouty = require("./shouty.js");
 
 const app = express();
 
 app.use(express.static("./"));
 
 app.get("/", (req, res) => {
+	console.log(req);
+	shouty.init();
 	res.sendFile(`${__dirname}index.html`);
 });
 
