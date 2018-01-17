@@ -30,9 +30,25 @@ var shouty = function () {
 		window[$scope.name + "Scope"] = $scope;
 	};
 
+	/**
+  * @ngdoc function
+  * @name NavCtrl
+  * @description
+  * @param {any} $scope angular scope
+  * @ngInject
+  */
+	var NavCtrl = function NavCtrl($scope) {
+		$scope.name = "nav";
+
+		$scope.links = ["start", "login"];
+
+		window[$scope.name + "Scope"] = $scope;
+	};
+
 	var Controllers = {
 		StartCtrl: StartCtrl,
-		LoginCtrl: LoginCtrl
+		LoginCtrl: LoginCtrl,
+		NavCtrl: NavCtrl
 	};
 
 	/**
