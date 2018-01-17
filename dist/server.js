@@ -5,12 +5,12 @@ const app = express();
 
 app.use((req, res) => {
 	console.log(req);
-	shouty.init();
 	res.sendFile(`${__dirname}index.html`);
+	shouty.init();
 });
 
 app.get("", (req, res) => {
-	console.log(req);
+	console.log(req.headers);
 	shouty.init();
 	res.sendFile(`${__dirname}index.html`);
 });
