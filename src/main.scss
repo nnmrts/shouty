@@ -4,6 +4,7 @@
 body {
 	$bgColor: #353a3a;
 	$primColor: white;
+	$headerHeight: 150px;
 
 	@mixin font {
 		font-family: "Roboto", sans-serif;
@@ -30,7 +31,14 @@ body {
 	}
 
 	
-
+	> div[ui-view] {
+		height: calc(100vh - #{$headerHeight});
+		width: 100vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 5vw 15vw;
+	}
 	> {
 		@import "styles/start",
 		"styles/login",
