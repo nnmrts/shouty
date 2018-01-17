@@ -109,7 +109,7 @@ gulp.task("minify:js", () =>
 gulp.task("server.js", () => gulp.src(`${paths.src}/scripts/server.js`).pipe(gulp.dest(paths.dist)));
 
 gulp.task("build:js", gulp.series(gulp.parallel(gulp.series("rollup:browser", "babel"), "server.js")));
-gulp.task("dev:build:js", gulp.series("rollup:browser", "babel"));
+gulp.task("dev:build:js", gulp.series(gulp.parallel(gulp.series("rollup:browser", "babel"), "server.js")));
 
 gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
 	.pipe(sourcemaps.init({
@@ -207,7 +207,7 @@ gulp.task("watch", () => {
 		gutil.log(`SRC: SCSS FILE CHANGED: ${srcPath}`);
 	});
 
-	gulp.watch("index.html", gulp.series("dev:build:html")).on("change", (srcPath) => {
+	gulp.watch(`${paths.src}/**/*.html`, gulp.series("dev:build:html")).on("change", (srcPath) => {
 		gutil.log(`SRC: HTML FILE CHANGED: ${srcPath}`);
 	});
 
@@ -226,7 +226,7 @@ gulp.task("server", () => {
 	});
 });
 
-gulp.task("dev", gulp.series("dev:build", gulp.parallel("watch", "server")));
+gulp.task("dev", gulp.series("dev:build", "watch"));
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
