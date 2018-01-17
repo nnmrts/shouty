@@ -177,7 +177,7 @@ gulp.task("build:css", gulp.series(
 
 gulp.task("dev:build:css", gulp.series("sass", "rename", "autoprefixer"));
 
-gulp.task("beautify:html", () => gulp.src(`${paths.src}/index.html`)
+gulp.task("beautify:html", () => gulp.src(`${paths.src}/**/*.html`)
 	.pipe(htmlbeautify())
 	.pipe(gulp.dest(paths.dist)));
 
