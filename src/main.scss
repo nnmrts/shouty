@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.0.46/css/materialdesignicons.min.css");
+
+body {
+	$bgColor: #353a3a;
+	$primColor: white;
+
+	@mixin font {
+		font-family: "Roboto", sans-serif;
+	}
+
+	margin: 0px;
+	width: 100vw;
+    height: 100vh;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: $bgColor;
+	color: $primColor;
+	@include font;
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+	a {
+		text-decoration: none;
+		color: white;
+	}
+
+	
+
+	> {
+		@import "styles/start",
+		"styles/login",
+		"styles/header";
+	}
+}
