@@ -7,10 +7,11 @@
  * @param {any} $scope angular scope
  * @ngInject
  */
-const StartCtrl = function($scope) {
+
+var StartCtrl = function StartCtrl($scope) {
 	$scope.name = "start";
 
-	window[`${$scope.name}Scope`] = $scope;
+	window[$scope.name + "Scope"] = $scope;
 };
 
 /**
@@ -20,17 +21,16 @@ const StartCtrl = function($scope) {
  * @param {any} $scope angular scope
  * @ngInject
  */
-const LoginCtrl = function($scope) {
+var LoginCtrl = function LoginCtrl($scope) {
 	$scope.name = "login";
 
-	window[`${$scope.name}Scope`] = $scope;
+	window[$scope.name + "Scope"] = $scope;
 };
 
-const Controllers = {
-	StartCtrl,
-	LoginCtrl
+var Controllers = {
+	StartCtrl: StartCtrl,
+	LoginCtrl: LoginCtrl
 };
-
 
 /**
  * @name shoutyApp
@@ -39,44 +39,32 @@ const Controllers = {
  *
  * Main module of the application.
  */
-const shouty = angular
-	.module("shoutyApp", [
-		"ngAnimate",
-		"ngAria",
-		"ngCookies",
-		"ngMessages",
-		"ngResource",
-		"ngRoute",
-		"ngSanitize",
-		"ngTouch",
-		"ui.router"
-	])
-	.config(($locationProvider, $stateProvider, $urlRouterProvider) => {
-		const startState = {
-			name: "start",
-			url: "/",
-			templateUrl: "./views/start.html",
-			controller: "StartCtrl"
-		};
-		const loginState = {
-			name: "login",
-			url: "/login",
-			templateUrl: "./views/login.html",
-			controller: "LoginCtrl"
-		};
+var shouty = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
+	var startState = {
+		name: "start",
+		url: "/",
+		templateUrl: "./views/start.html",
+		controller: "StartCtrl"
+	};
+	var loginState = {
+		name: "login",
+		url: "/login",
+		templateUrl: "./views/login.html",
+		controller: "LoginCtrl"
+	};
 
-		$stateProvider.state(startState);
-		$stateProvider.state(loginState);
+	$stateProvider.state(startState);
+	$stateProvider.state(loginState);
 
-		$urlRouterProvider.otherwise("/");
+	$urlRouterProvider.otherwise("/");
 
-		$locationProvider.html5Mode({
-			enabled: true,
-			requireBase: false
-		});
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false
 	});
+}]);
 
-Object.keys(Controllers).forEach((name) => {
+Object.keys(Controllers).forEach(function (name) {
 	shouty.controller(name, Controllers[name]);
 });
 
