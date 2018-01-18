@@ -16,7 +16,18 @@ const StartCtrl = function($scope, $http) {
 	});
 
 	$scope.sendMessage = () => {
-		console.log("SENT");
+		$http.post("/", {
+			username: $scope.username,
+			message: $scope.message
+		}).then((response) => {
+			if (response.data === "success") {
+				$http.get("./messages.json").then((response) => {
+					$scope.messages = response.data;
+
+					$scope.$applyAsync();
+				});
+			}
+		});
 	};
 
 	window[`${$scope.name}Scope`] = $scope;
