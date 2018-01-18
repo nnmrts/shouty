@@ -50,6 +50,15 @@ const shoutyApp = angular
 			enabled: true,
 			requireBase: false
 		});
+	}).directive("ngEnter", () => function(scope, element, attrs) {
+		element.bind("keydown keypress", (event) => {
+			if (event.which === 13) {
+				scope.$apply(() => {
+					scope.$eval(attrs.ngEnter);
+				});
+				event.preventDefault();
+			}
+		});
 	});
 
 Object.keys(Controllers).forEach((name) => {
