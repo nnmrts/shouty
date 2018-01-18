@@ -32,13 +32,13 @@ const shoutyApp = angular
 	.config(($locationProvider, $stateProvider, $urlRouterProvider) => {
 		const startState = {
 			name: "start",
-			url: `${cwd}/`,
+			url: `${cwd}`,
 			templateUrl: `${cwd}views/start.html`,
 			controller: "StartCtrl"
 		};
 		const loginState = {
 			name: "login",
-			url: `${cwd}/login`,
+			url: `${cwd}login`,
 			templateUrl: `${cwd}views/login.html`,
 			controller: "LoginCtrl"
 		};
