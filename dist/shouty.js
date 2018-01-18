@@ -9913,6 +9913,8 @@ var shouty = function () {
 		NavCtrl: NavCtrl
 	};
 
+	var cwd = window.location.pathname;
+
 	/**
   * @name shoutyApp
   * @description
@@ -9923,14 +9925,14 @@ var shouty = function () {
 	var shoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
 		var startState = {
 			name: "start",
-			url: "^/",
-			templateUrl: "^/views/start.html",
+			url: cwd + "/",
+			templateUrl: cwd + "views/start.html",
 			controller: "StartCtrl"
 		};
 		var loginState = {
 			name: "login",
-			url: "^/login",
-			templateUrl: "^/views/login.html",
+			url: cwd + "/login",
+			templateUrl: cwd + "views/login.html",
 			controller: "LoginCtrl"
 		};
 
