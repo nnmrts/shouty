@@ -6,8 +6,8 @@ div#header {
 	flex-direction: column;
 	padding: 1vw;
 	height: $headerHeight;
-	border-bottom: white 1px solid;
-    background-color: #292d2d;
+	border-bottom: $secColor 1px solid;
+    background-color: $thiColor;
 	>h1 {
 		margin: 0px;
 	}
@@ -18,7 +18,7 @@ div#header {
 		width: 40%;
 		>a {
 			width: 7vw;
-			border: white 1px solid;
+			border: $secColor 1px solid;
 			border-radius: 5px;
 			padding: 0.5vw 1vw;
 			transition: all 0.4s;
@@ -28,8 +28,8 @@ div#header {
 				border-radius: 15px;
 			}
 			&.active {
-				background-color: white;
-				color: $bgColor;
+				background-color: $secColor;
+				color: $priColor;
 			}
 		}
 	}

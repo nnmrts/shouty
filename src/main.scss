@@ -2,8 +2,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.0.46/css/materialdesignicons.min.css");
 
 body {
-	$bgColor: #353a3a;
-	$primColor: white;
+	$priColor: #353a3a;
+	$secColor: white;
+	$thiColor: #292d2d;
+	$fouColor: #eaecec;
 	$headerHeight: 150px;
 
 	@mixin font {
@@ -17,8 +19,8 @@ body {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	background-color: $bgColor;
-	color: $primColor;
+	background-color: $priColor;
+	color: $secColor;
 	@include font;
 	*,
 	*::before,
@@ -27,7 +29,7 @@ body {
 	}
 	a {
 		text-decoration: none;
-		color: white;
+		color: $secColor;
 	}
 
 	
