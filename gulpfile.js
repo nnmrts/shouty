@@ -106,10 +106,8 @@ gulp.task("minify:js", () =>
 		}))
 		.pipe(gulp.dest(pkg.browser.replace("/shouty.js", ""))));
 
-gulp.task("server.js", () => gulp.src(`${paths.src}/scripts/server.js`).pipe(gulp.dest(paths.dist)));
-
-gulp.task("build:js", gulp.series(gulp.parallel(gulp.series("rollup:browser", "babel"), "server.js")));
-gulp.task("dev:build:js", gulp.series(gulp.parallel(gulp.series("rollup:browser", "babel"), "server.js")));
+gulp.task("build:js", gulp.series("rollup:browser", "babel"));
+gulp.task("dev:build:js", gulp.series("rollup:browser", "babel"));
 
 gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
 	.pipe(sourcemaps.init({
