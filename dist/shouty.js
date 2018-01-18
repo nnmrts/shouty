@@ -9923,14 +9923,14 @@ var shouty = function () {
 	var shoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
 		var startState = {
 			name: "start",
-			url: "/",
-			templateUrl: "/views/start.html",
+			url: "^/",
+			templateUrl: "^/views/start.html",
 			controller: "StartCtrl"
 		};
 		var loginState = {
 			name: "login",
-			url: "/login",
-			templateUrl: "/views/login.html",
+			url: "^/login",
+			templateUrl: "^/views/login.html",
 			controller: "LoginCtrl"
 		};
 
