@@ -5,7 +5,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var shouty = function () {
 	'use strict';
 
-	var cwd = window.location.pathname;
+	var cwd = window.location.pathname.replace(/\//g, "");
 
 	/**
   * @ngdoc function
@@ -25,7 +25,7 @@ var shouty = function () {
 		});
 
 		$scope.sendMessage = function () {
-			$http.post(cwd, {
+			$http.post("/" + cwd, {
 				username: $scope.username,
 				message: $scope.message
 			}).then(function (response) {
