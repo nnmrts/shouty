@@ -10,8 +10,14 @@ const StartCtrl = function($scope, $http) {
 	$scope.name = "start";
 
 	$http.get("./messages.json").then((response) => {
-		console.log(response);
+		$scope.messages = response.data;
+
+		$scope.$applyAsync();
 	});
+
+	$scope.sendMessage = () => {
+		console.log("SENT");
+	};
 
 	window[`${$scope.name}Scope`] = $scope;
 };
