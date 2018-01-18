@@ -1,7 +1,15 @@
-<div id="shoutbox">
+<div id="shoutbox" ng-enter="sendMessage()">
 	<div id="chat">
-		<div ng-repeat="message in messages"></div>
+		<div class="message-body" ng-repeat="message in messages">
+			<span class="username">{{message.username}}</span>
+			<span class="message">{{message.message}}</span>
+		</div>
 	</div>
-	<input ng-model="message"></input>
-	<button ng-click="sendMessage()">SHOUT</button>
+	<div id="footer">
+		<input id="username-input" placeholder="username" maxlength="20" ng-model="username"></input>
+		<input id="message-input" placeholder="shout something" maxlength="80" ng-model="message"></input>
+		<button ng-click="sendMessage()">
+			<span class="mdi mdi-send"></span>
+		</button>
+	</div>
 </div>
