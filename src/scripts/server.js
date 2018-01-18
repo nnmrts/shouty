@@ -40,6 +40,6 @@ app.post("/", (req, res) => {
 	});
 });
 
-app.listen("/dist", () => {
+app.listen(process.env.PORT || 9000, () => {
 	console.log("shouty listening on port 9000!");
 });
