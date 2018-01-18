@@ -21,8 +21,8 @@ const StartCtrl = function($scope, $http) {
 			message: $scope.message
 		}).then((response) => {
 			if (response.data === "success") {
-				$http.get("./messages.json").then((response) => {
-					$scope.messages = response.data;
+				$http.get("./messages.json").then((innerResponse) => {
+					$scope.messages = innerResponse.data;
 
 					$scope.$applyAsync();
 				});
