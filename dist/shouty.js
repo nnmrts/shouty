@@ -9924,13 +9924,13 @@ var shouty = function () {
 		var startState = {
 			name: "start",
 			url: "/",
-			templateUrl: "./views/start.html",
+			templateUrl: "/views/start.html",
 			controller: "StartCtrl"
 		};
 		var loginState = {
 			name: "login",
 			url: "/login",
-			templateUrl: "./views/login.html",
+			templateUrl: "/views/login.html",
 			controller: "LoginCtrl"
 		};
 

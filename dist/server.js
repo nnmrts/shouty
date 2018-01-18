@@ -5,6 +5,8 @@ const useragent = require("express-useragent");
 
 const app = express();
 
+app.set("port", (process.env.PORT || 9000));
+
 app.use(express.static("./"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -40,6 +42,6 @@ app.post("/", (req, res) => {
 	});
 });
 
-app.listen(process.env.PORT || 9000, () => {
-	console.log("shouty listening on port 9000!");
+app.listen(app.get("port"), () => {
+	console.log("App is running, server is listening on port ", app.get("port"));
 });
