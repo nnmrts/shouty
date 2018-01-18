@@ -40,6 +40,6 @@ app.post("/", (req, res) => {
 	});
 });
 
-app.listen(9000, () => {
+app.listen("/", () => {
 	console.log("shouty listening on port 9000!");
 });
