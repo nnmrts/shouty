@@ -2,13 +2,13 @@
 	"name": "shouty",
 	"private": true,
 	"version": "0.1.0",
-	"main": "dist/server.js",
+	"main": "server.js",
 	"browser": "dist/shouty.js",
 	"engines": {
 		"node": ">=0.10.0"
 	},
 	"scripts": {
-		"start": "node dist/server.js"
+		"start": "node server.js"
 	},
 	"description": "Example shoutbox application",
 	"repository": {

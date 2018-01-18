@@ -2,15 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jsonfile = require("jsonfile");
 const useragent = require("express-useragent");
-const url = require("url");
+const path = require("path");
 
 const app = express();
 
-const cwd = url.pathname;
-
 app.set("port", (process.env.PORT || 9000));
 
-app.use(express.static("./"));
+app.use(express.static("./dist"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -18,7 +16,8 @@ app.use(bodyParser.urlencoded({
 
 app.enable("trust proxy");
 
-app.post(`${cwd}/`, (req, res) => {
+app.post("/", (req, res) => {
+	console.log(req.body);
 	jsonfile.readFile("messages.json", (error, messages) => {
 		const body = {
 			username: req.body.username,
@@ -39,7 +38,7 @@ app.post(`${cwd}/`, (req, res) => {
 
 		messages.push(body);
 
-		jsonfile.writeFile("./messages.json", messages, () => {
+		jsonfile.writeFile("messages.json", messages, () => {
 			res.send("success");
 		});
 	});
