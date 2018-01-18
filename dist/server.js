@@ -10,7 +10,7 @@ const cwd = url.pathname;
 
 app.set("port", (process.env.PORT || 9000));
 
-app.use(express.static("./"));
+app.use(express.static(`${cwd}/`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -39,7 +39,7 @@ app.post(`${cwd}/`, (req, res) => {
 
 		messages.push(body);
 
-		jsonfile.writeFile("./messages.json", messages, () => {
+		jsonfile.writeFile("messages.json", messages, () => {
 			res.send("success");
 		});
 	});
