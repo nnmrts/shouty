@@ -1,4 +1,4 @@
-const cwd = window.location.pathname;
+const cwd = window.location.pathname.replace(/\//g, "");
 
 /**
  * @ngdoc function
@@ -18,7 +18,7 @@ const StartCtrl = function($scope, $http) {
 	});
 
 	$scope.sendMessage = () => {
-		$http.post(cwd, {
+		$http.post(`/${cwd}`, {
 			username: $scope.username,
 			message: $scope.message
 		}).then((response) => {
