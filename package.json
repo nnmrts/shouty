@@ -7,6 +7,9 @@
 	"engines": {
 		"node": ">=0.10.0"
 	},
+	"scripts": {
+		"start": "node dist/server.js"
+	},
 	"description": "Example shoutbox application",
 	"repository": {
 		"type": "git",
