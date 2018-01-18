@@ -185,7 +185,7 @@ gulp.task("build:html", gulp.series("beautify:html"));
 
 gulp.task("dev:build:html", gulp.series("build:html"));
 
-gulp.task("build:misc", () => gulp.src(`${paths.src}/{images/**/*,favicon.ico,robots.txt}`).pipe(gulp.dest(paths.dist)));
+gulp.task("build:misc", () => gulp.src(`${paths.src}/{images/**/*,favicon.ico,robots.txt,messages.json}`).pipe(gulp.dest(paths.dist)));
 
 gulp.task("dev:build:misc", gulp.series("build:misc"));
 
@@ -211,7 +211,7 @@ gulp.task("watch", () => {
 		gutil.log(`SRC: HTML FILE CHANGED: ${srcPath}`);
 	});
 
-	gulp.watch(`${paths.src}/{images/**/*,favicon.ico,robots.txt}`, gulp.series("dev:build:misc")).on("change", (srcPath) => {
+	gulp.watch(`${paths.src}/{images/**/*,favicon.ico,robots.txt,messages.json}`, gulp.series("dev:build:misc")).on("change", (srcPath) => {
 		gutil.log(`SRC: MISC FILE CHANGED: ${srcPath}`);
 	});
 });
