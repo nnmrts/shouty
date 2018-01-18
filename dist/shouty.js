@@ -5,6 +5,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var shouty = function () {
 	'use strict';
 
+	var cwd = window.location.pathname;
+
 	/**
   * @ngdoc function
   * @name StartCtrl
@@ -13,23 +15,22 @@ var shouty = function () {
   * @param {any} $http angular $http service
   * @ngInject
   */
-
 	var StartCtrl = function StartCtrl($scope, $http) {
 		$scope.name = "start";
 
-		$http.get("./messages.json").then(function (response) {
+		$http.get("messages.json").then(function (response) {
 			$scope.messages = response.data;
 
 			$scope.$applyAsync();
 		});
 
 		$scope.sendMessage = function () {
-			$http.post("/", {
+			$http.post(cwd, {
 				username: $scope.username,
 				message: $scope.message
 			}).then(function (response) {
 				if (response.data === "success") {
-					$http.get("./messages.json").then(function (innerResponse) {
+					$http.get("messages.json").then(function (innerResponse) {
 						$scope.messages = innerResponse.data;
 
 						$scope.$applyAsync();
@@ -9913,7 +9914,7 @@ var shouty = function () {
 		NavCtrl: NavCtrl
 	};
 
-	var cwd = window.location.pathname;
+	var cwd$1 = window.location.pathname;
 
 	/**
   * @name shoutyApp
@@ -9925,14 +9926,14 @@ var shouty = function () {
 	var shoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
 		var startState = {
 			name: "start",
-			url: "" + cwd,
-			templateUrl: cwd + "views/start.html",
+			url: "" + cwd$1,
+			templateUrl: cwd$1 + "views/start.html",
 			controller: "StartCtrl"
 		};
 		var loginState = {
 			name: "login",
-			url: cwd + "login",
-			templateUrl: cwd + "views/login.html",
+			url: cwd$1 + "login",
+			templateUrl: cwd$1 + "views/login.html",
 			controller: "LoginCtrl"
 		};
 
