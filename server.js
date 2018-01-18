@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jsonfile = require("jsonfile");
 const useragent = require("express-useragent");
-const path = require("path");
 
 const app = express();
 
@@ -18,7 +17,7 @@ app.enable("trust proxy");
 
 app.post("/", (req, res) => {
 	console.log(req.body);
-	jsonfile.readFile("messages.json", (error, messages) => {
+	jsonfile.readFile("./dist/messages.json", (error, messages) => {
 		const body = {
 			username: req.body.username,
 			message: req.body.message,
@@ -38,7 +37,7 @@ app.post("/", (req, res) => {
 
 		messages.push(body);
 
-		jsonfile.writeFile("messages.json", messages, () => {
+		jsonfile.writeFile("./dist/messages.json", messages, () => {
 			res.send("success");
 		});
 	});
