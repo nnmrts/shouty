@@ -8,6 +8,8 @@ const Controllers = {
 	NavCtrl
 };
 
+const cwd = window.location.pathname;
+
 /**
  * @name shoutyApp
  * @description
@@ -30,14 +32,14 @@ const shoutyApp = angular
 	.config(($locationProvider, $stateProvider, $urlRouterProvider) => {
 		const startState = {
 			name: "start",
-			url: "^/",
-			templateUrl: "^/views/start.html",
+			url: `${cwd}/`,
+			templateUrl: `${cwd}views/start.html`,
 			controller: "StartCtrl"
 		};
 		const loginState = {
 			name: "login",
-			url: "^/login",
-			templateUrl: "^/views/login.html",
+			url: `${cwd}/login`,
+			templateUrl: `${cwd}views/login.html`,
 			controller: "LoginCtrl"
 		};
 
