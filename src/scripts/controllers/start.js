@@ -1,3 +1,5 @@
+const cwd = window.location.pathname;
+
 /**
  * @ngdoc function
  * @name StartCtrl
@@ -9,19 +11,19 @@
 const StartCtrl = function($scope, $http) {
 	$scope.name = "start";
 
-	$http.get("./messages.json").then((response) => {
+	$http.get("messages.json").then((response) => {
 		$scope.messages = response.data;
 
 		$scope.$applyAsync();
 	});
 
 	$scope.sendMessage = () => {
-		$http.post("/", {
+		$http.post(cwd, {
 			username: $scope.username,
 			message: $scope.message
 		}).then((response) => {
 			if (response.data === "success") {
-				$http.get("./messages.json").then((innerResponse) => {
+				$http.get("messages.json").then((innerResponse) => {
 					$scope.messages = innerResponse.data;
 
 					$scope.$applyAsync();
