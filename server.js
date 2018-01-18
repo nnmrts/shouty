@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({
 app.enable("trust proxy");
 
 app.post("/", (req, res) => {
-	console.log(req.body);
 	jsonfile.readFile("./dist/messages.json", (error, messages) => {
 		const body = {
 			username: req.body.username,
