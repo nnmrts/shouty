@@ -1,0 +1,72 @@
+div#start {
+	>div#shoutbox {
+		width: 100%;
+		height: 100%;
+		background-color: $secColor;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		padding: 5px;
+		>div#chat {
+			flex-grow: 1;
+			margin-bottom: 5px;
+			border-radius: 5px;
+			background-color: #eaecec;
+			>div.message-body {
+				width: 100%;
+				color: $thiColor;
+				display: flex;
+				justify-content: space-between;
+				padding: 1vw;
+				font-size: 1.7vw;
+				&:nth-child(even) {
+					background-color: rgba($thiColor, 0.2)
+				}
+				>span.username {
+					width: calc(30% - 5px);
+				}
+				>span.message {
+					width: 70%;
+				}
+			}
+		}
+		>div#footer {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			>input {
+				font-size: 1.7vw;
+				outline: none;
+				border: none;
+				padding: 1vw;
+				color: $thiColor;
+				background-color: $fouColor;
+				border-radius: 5px;
+				&#username-input {
+					width: calc(30% - 5px);
+				}
+				&#message-input {
+					width: 70%;
+					padding: 1vw 4vw 1vw 1vw;
+				}
+				@include font;
+			}
+			>button {
+				position: absolute;
+				bottom: 0px;
+				right: 0%;
+				height: 100%;
+				background: none;
+				border: none;
+				padding: 1vw;
+				color: $thiColor;
+				font-family: "Material Design Icons";
+				font-size: 2vw;
+				outline: none;
+				>span {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
