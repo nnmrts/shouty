@@ -7,9 +7,10 @@ import { dateToString, dateToChatTime } from "../utils.js";
  * @description
  * @param {any} $scope angular scope
  * @param {any} $http angular $http service
+ * @param {any} fileUpload angular $http service
  * @ngInject
  */
-const StartCtrl = function($scope, $http) {
+const StartCtrl = function($scope, $http, fileUpload) {
 	$scope.name = "start";
 
 	$http.get("messages.json").then((response) => {
@@ -53,6 +54,12 @@ const StartCtrl = function($scope, $http) {
 				}
 			});
 		}
+	};
+
+	$scope.uploadFile = function() {
+		const file = $scope.myFile;
+		const uploadUrl = "/savedata";
+		fileUpload.uploadFileToUrl(file, uploadUrl);
 	};
 
 	window[`${$scope.name}Scope`] = $scope;

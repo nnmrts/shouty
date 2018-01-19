@@ -1,23 +1,12 @@
-import StartCtrl from "./controllers/start.js";
-import LoginCtrl from "./controllers/login.js";
-import NavCtrl from "./controllers/nav.js";
-
-const Controllers = {
-	StartCtrl,
-	LoginCtrl,
-	NavCtrl
-};
-
-const cwd = window.location.pathname;
+import map from "./map.js";
+import ShoutyCfg from "./cfg.js";
 
 /**
- * @name shoutyApp
+ * @name ShoutyApp
  * @description
- * # shoutyApp
- *
- * Main module of the application.
+ * main module of the application.
  */
-const shoutyApp = angular
+const ShoutyApp = angular
 	.module("shoutyApp", [
 		"ngAnimate",
 		"ngAria",
@@ -29,43 +18,13 @@ const shoutyApp = angular
 		"ngTouch",
 		"ui.router"
 	])
-	.config(($locationProvider, $stateProvider, $urlRouterProvider) => {
-		const startState = {
-			name: "start",
-			url: `${cwd}`,
-			templateUrl: `${cwd}views/start.html`,
-			controller: "StartCtrl"
-		};
-		const loginState = {
-			name: "login",
-			url: `${cwd}login`,
-			templateUrl: `${cwd}views/login.html`,
-			controller: "LoginCtrl"
-		};
+	.config(ShoutyCfg);
 
-		$stateProvider.state(startState);
-		$stateProvider.state(loginState);
-
-		$urlRouterProvider.otherwise("/");
-
-		$locationProvider.html5Mode({
-			enabled: true,
-			requireBase: false
-		});
-	}).directive("ngEnter", () => function(scope, element, attrs) {
-		element.bind("keydown keypress", (event) => {
-			if (event.which === 13) {
-				scope.$apply(() => {
-					scope.$eval(attrs.ngEnter);
-				});
-				event.preventDefault();
-			}
-		});
+Object.keys(map).forEach((key) => {
+	Object.keys(map[key]).forEach((name) => {
+		ShoutyApp[key.slice(0, -1)](name, map[key][name]);
 	});
-
-Object.keys(Controllers).forEach((name) => {
-	shoutyApp.controller(name, Controllers[name]);
 });
 
 
-export default shoutyApp;
+export default ShoutyApp;

@@ -2,8 +2,21 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jsonfile = require("jsonfile");
 const useragent = require("express-useragent");
+const path = require("path");
+const multer = require("multer");
 
 const app = express();
+
+const storage = multer.diskStorage({
+	destination: "./uploads/",
+	filename(req, file, cb) {
+		cb(null, `${file.originalname.replace(path.extname(file.originalname), "")}-${Date.now()}${path.extname(file.originalname)}`);
+	}
+});
+
+const upload = multer({
+	storage
+});
 
 app.set("port", (process.env.PORT || 9000));
 
@@ -46,6 +59,10 @@ app.post("/", (req, res) => {
 			res.send("success");
 		});
 	});
+});
+
+app.post("/image", upload.single("file"), (req) => {
+	console.log("Uploade Successful ", req.file, req.body);
 });
 
 app.listen(app.get("port"), () => {
