@@ -26,10 +26,15 @@ div#start {
 					background-color: rgba($thiColor, 0.2)
 				}
 				>span.username {
-					width: calc(30% - 5px);
+					width: calc(25% - 5px - 1vw);
 				}
 				>span.message {
-					width: 70%;
+					width: calc(60% - 10px - 1vw);
+				}
+				>span.time {
+					width: calc(15% - 5px - 1vw);
+					font-size: 1vw;
+					text-align: center;
 				}
 			}
 		}
@@ -54,10 +59,10 @@ div#start {
 					}
 				}
 				&#username-input {
-					width: calc(30% - 5px);
+					width: calc(25% - 5px);
 				}
 				&#message-input {
-					width: 70%;
+					width: 75%;
 					padding: 1vw 4vw 1vw 1vw;
 				}
 				@include font;
