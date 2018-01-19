@@ -1,6 +1,20 @@
 [
 	{
-		"message": "Hello!",
-		"username": "Anton"
+		"username": "Anton",
+		"message": "Hello World!",
+		"time": "2018-01-19T05:39:42",
+		"chatTime": "19.01.2018\n05:39:42",
+		"ip": "::1",
+		"useragent": {
+			"browser": {
+				"name": "Chrome",
+				"version": "63.0.3239.84"
+			},
+			"platform": {
+				"name": "Linux",
+				"os": "Linux"
+			},
+			"source": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+		}
 	}
 ]

@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { dateToString, dateToChatTime } from "../utils.js";
 
 /**
  * @ngdoc function
@@ -24,25 +25,14 @@ const StartCtrl = function($scope, $http) {
 
 	$scope.sendMessage = () => {
 		if ($scope.test()) {
-			const date = new Date();
-			const time = `${date.getFullYear()}/${(date.getMonth() + 1).toLocaleString("de", {
-				minimumIntegerDigits: 2
-			})}/${date.getDate().toLocaleString("de", {
-				minimumIntegerDigits: 2
-			})}\n${date.getHours().toLocaleString("de", {
-				minimumIntegerDigits: 2
-			})}:${date.getMinutes().toLocaleString("de", {
-				minimumIntegerDigits: 2
-			})}:${date.getSeconds().toLocaleString("de", {
-				minimumIntegerDigits: 2
-			})}`;
-
 			$http.post("/", {
 				username: $scope.username,
 				message: $scope.message,
-				time
+				time: dateToString(new Date()),
+				chatTime: dateToChatTime(new Date())
 			}).then((response) => {
 				if (response.data === "success") {
+					$("#message-input").removeClass("ng-touched");
 					$scope.message = "";
 					$http.get("messages.json").then((innerResponse) => {
 						$scope.messages = innerResponse.data;
