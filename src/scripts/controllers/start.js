@@ -15,6 +15,10 @@ const StartCtrl = function($scope, $http) {
 	$http.get("messages.json").then((response) => {
 		$scope.messages = response.data;
 
+		$scope.messages.forEach((message) => {
+			message.chatTime = dateToChatTime(new Date(message.time));
+		});
+
 		$scope.$applyAsync();
 	});
 
