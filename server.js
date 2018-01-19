@@ -19,7 +19,11 @@ app.post("/", (req, res) => {
 	jsonfile.readFile("./dist/messages.json", (error, messages) => {
 		const newMessages = messages;
 
-		newMessages.push(Object.assign(req.body, {
+		newMessages.push(Object.assign(() => {
+			delete req.body.chatTime;
+
+			return req.body;
+		}, {
 			ip: req.ip,
 			useragent: {
 				browser: {
