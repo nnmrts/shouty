@@ -12,6 +12,7 @@ div#start {
 			margin-bottom: 5px;
 			border-radius: 5px;
 			background-color: #eaecec;
+			overflow: auto;
 			>div.message-body {
 				width: 100%;
 				color: $thiColor;
@@ -19,6 +20,8 @@ div#start {
 				justify-content: space-between;
 				padding: 1vw;
 				font-size: 1.7vw;
+				white-space: pre-wrap;
+				word-wrap: break-word;
 				&:nth-child(even) {
 					background-color: rgba($thiColor, 0.2)
 				}
@@ -34,6 +37,7 @@ div#start {
 			position: relative;
 			display: flex;
 			justify-content: space-between;
+			flex-shrink: 0;
 			>input {
 				font-size: 1.7vw;
 				outline: none;
@@ -42,6 +46,13 @@ div#start {
 				color: $thiColor;
 				background-color: $fouColor;
 				border-radius: 5px;
+				transition: all 0.4s;
+				&.ng-touched.ng-empty {
+					background-color: #ff8282;
+					&::placeholder {
+						color: $fouColor;
+					}
+				}
 				&#username-input {
 					width: calc(30% - 5px);
 				}
