@@ -2,7 +2,7 @@ const utils = {
 	/**
 	 * @name dateToString
 	 * @description
-	 * converts a javascript date to a date-time string
+	 * converts a javascript date to a date-time string in the ISO 8601 format
 	 *
 	 * ### Fri Jan 19 2018 05:08:48 GMT+0100 (CET)
 	 * ### gets...
