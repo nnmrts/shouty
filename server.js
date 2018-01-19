@@ -17,9 +17,9 @@ app.enable("trust proxy");
 
 app.post("/", (req, res) => {
 	jsonfile.readFile("./dist/messages.json", (error, messages) => {
-		const body = {
-			username: req.body.username,
-			message: req.body.message,
+		const newMessages = messages;
+
+		newMessages.push(Object.assign(req.body, {
 			ip: req.ip,
 			useragent: {
 				browser: {
@@ -32,11 +32,13 @@ app.post("/", (req, res) => {
 				},
 				source: useragent.parse(req.headers["user-agent"]).source
 			}
-		};
+		}));
 
-		messages.push(body);
+		while (newMessages.length > 8) {
+			newMessages.shift();
+		}
 
-		jsonfile.writeFile("./dist/messages.json", messages, () => {
+		jsonfile.writeFile("./dist/messages.json", newMessages, () => {
 			res.send("success");
 		});
 	});
