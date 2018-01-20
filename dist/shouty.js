@@ -9955,15 +9955,12 @@ var shouty = function () {
 		};
 
 		$scope.postMessage = function (message) {
-			$http.post("/", message).then(function (response) {
-				if (response.data === "success") {
-					jquery("#message-input").removeClass("ng-touched");
-					$scope.message = "";
-					$scope.image = "";
+			$http.post("/", message).then(function () {
+				jquery("#message-input").removeClass("ng-touched");
+				$scope.message = "";
+				$scope.image = "";
 
-					$scope.$applyAsync();
-					// $scope.getMessages();
-				}
+				$scope.$applyAsync();
 			});
 		};
 
