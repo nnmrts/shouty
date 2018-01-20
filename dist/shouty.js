@@ -1,59 +1,9 @@
-"use strict";
+'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var shouty = function () {
 	'use strict';
-
-	var cwd = window.location.pathname.replace(/\//g, "");
-
-	/**
-  * @ngdoc function
-  * @name StartCtrl
-  * @description
-  * @param {any} $scope angular scope
-  * @param {any} $http angular $http service
-  * @ngInject
-  */
-	var StartCtrl = function StartCtrl($scope, $http) {
-		$scope.name = "start";
-
-		$http.get("messages.json").then(function (response) {
-			$scope.messages = response.data;
-
-			$scope.$applyAsync();
-		});
-
-		$scope.sendMessage = function () {
-			$http.post("/" + cwd, {
-				username: $scope.username,
-				message: $scope.message
-			}).then(function (response) {
-				if (response.data === "success") {
-					$http.get("messages.json").then(function (innerResponse) {
-						$scope.messages = innerResponse.data;
-
-						$scope.$applyAsync();
-					});
-				}
-			});
-		};
-
-		window[$scope.name + "Scope"] = $scope;
-	};
-
-	/**
-  * @ngdoc function
-  * @name LoginCtrl
-  * @description
-  * @param {any} $scope angular scope
-  * @ngInject
-  */
-	var LoginCtrl = function LoginCtrl($scope) {
-		$scope.name = "login";
-
-		window[$scope.name + "Scope"] = $scope;
-	};
 
 	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -270,7 +220,7 @@ var shouty = function () {
 				}
 
 				// Handle case when target is a string or something (possible in deep copy)
-				if ((typeof target === "undefined" ? "undefined" : _typeof(target)) !== "object" && !jQuery.isFunction(target)) {
+				if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) !== "object" && !jQuery.isFunction(target)) {
 					target = {};
 				}
 
@@ -395,7 +345,7 @@ var shouty = function () {
 					}
 
 					// Support: Android <=2.3 only (functionish RegExp)
-					return (typeof obj === "undefined" ? "undefined" : _typeof(obj)) === "object" || typeof obj === "function" ? class2type[toString.call(obj)] || "object" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+					return (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === "object" || typeof obj === "function" ? class2type[toString.call(obj)] || "object" : typeof obj === 'undefined' ? 'undefined' : _typeof(obj);
 				},
 
 				// Evaluates a script in a global context
@@ -743,7 +693,7 @@ var shouty = function () {
 
 						// U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
 						if (ch === "\0") {
-							return "\uFFFD";
+							return '\uFFFD';
 						}
 
 						// Control characters and (dependent upon position) numbers get escaped as code points
@@ -3503,7 +3453,7 @@ var shouty = function () {
 										// Support: Promises/A+ section 2.3.4
 										// https://promisesaplus.com/#point-64
 										// Only check objects and functions for thenability
-										(typeof returned === "undefined" ? "undefined" : _typeof(returned)) === "object" || typeof returned === "function") && returned.then;
+										(typeof returned === 'undefined' ? 'undefined' : _typeof(returned)) === "object" || typeof returned === "function") && returned.then;
 
 										// Handle a returned thenable
 										if (jQuery.isFunction(then)) {
@@ -4143,7 +4093,7 @@ var shouty = function () {
 					}
 
 					// Sets multiple values
-					if ((typeof key === "undefined" ? "undefined" : _typeof(key)) === "object") {
+					if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === "object") {
 						return this.each(function () {
 							dataUser.set(this, key);
 						});
@@ -4724,7 +4674,7 @@ var shouty = function () {
 				var origFn, type;
 
 				// Types can be a map of types/handlers
-				if ((typeof types === "undefined" ? "undefined" : _typeof(types)) === "object") {
+				if ((typeof types === 'undefined' ? 'undefined' : _typeof(types)) === "object") {
 
 					// ( types-Object, selector, data )
 					if (typeof selector !== "string") {
@@ -5402,7 +5352,7 @@ var shouty = function () {
 						jQuery(types.delegateTarget).off(handleObj.namespace ? handleObj.origType + "." + handleObj.namespace : handleObj.origType, handleObj.selector, handleObj.handler);
 						return this;
 					}
-					if ((typeof types === "undefined" ? "undefined" : _typeof(types)) === "object") {
+					if ((typeof types === 'undefined' ? 'undefined' : _typeof(types)) === "object") {
 
 						// ( types-object [, selector] )
 						for (type in types) {
@@ -6249,7 +6199,7 @@ var shouty = function () {
 
 					// Check if we're setting a value
 					if (value !== undefined) {
-						type = typeof value === "undefined" ? "undefined" : _typeof(value);
+						type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
 
 						// Convert "+=" or "-=" to relative numbers (#7345)
 						if (type === "string" && (ret = rcssNum.exec(value)) && ret[1]) {
@@ -6979,7 +6929,7 @@ var shouty = function () {
 			});
 
 			jQuery.speed = function (speed, easing, fn) {
-				var opt = speed && (typeof speed === "undefined" ? "undefined" : _typeof(speed)) === "object" ? jQuery.extend({}, speed) : {
+				var opt = speed && (typeof speed === 'undefined' ? 'undefined' : _typeof(speed)) === "object" ? jQuery.extend({}, speed) : {
 					complete: fn || !fn && easing || jQuery.isFunction(speed) && speed,
 					duration: speed,
 					easing: fn && easing || easing && !jQuery.isFunction(easing) && easing
@@ -7599,7 +7549,7 @@ var shouty = function () {
 				},
 
 				toggleClass: function toggleClass(value, stateVal) {
-					var type = typeof value === "undefined" ? "undefined" : _typeof(value);
+					var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
 
 					if (typeof stateVal === "boolean" && type === "string") {
 						return stateVal ? this.addClass(value) : this.removeClass(value);
@@ -7880,7 +7830,7 @@ var shouty = function () {
 					ontype = type.indexOf(":") < 0 && "on" + type;
 
 					// Caller can pass in a jQuery.Event object, Object, or just an event type string
-					event = event[jQuery.expando] ? event : new jQuery.Event(type, (typeof event === "undefined" ? "undefined" : _typeof(event)) === "object" && event);
+					event = event[jQuery.expando] ? event : new jQuery.Event(type, (typeof event === 'undefined' ? 'undefined' : _typeof(event)) === "object" && event);
 
 					// Trigger bitmask: & 1 for native handlers; & 2 for jQuery (always true)
 					event.isTrigger = onlyHandlers ? 2 : 3;
@@ -8105,7 +8055,7 @@ var shouty = function () {
 						} else {
 
 							// Item is non-scalar (array or object), encode its numeric index.
-							buildParams(prefix + "[" + ((typeof v === "undefined" ? "undefined" : _typeof(v)) === "object" && v != null ? i : "") + "]", v, traditional, add);
+							buildParams(prefix + "[" + ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) === "object" && v != null ? i : "") + "]", v, traditional, add);
 						}
 					});
 				} else if (!traditional && jQuery.type(obj) === "object") {
@@ -8569,7 +8519,7 @@ var shouty = function () {
 				ajax: function ajax(url, options) {
 
 					// If url is an object, simulate pre-1.5 signature
-					if ((typeof url === "undefined" ? "undefined" : _typeof(url)) === "object") {
+					if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === "object") {
 						options = url;
 						url = undefined;
 					}
@@ -9503,7 +9453,7 @@ var shouty = function () {
 					params = undefined;
 
 					// Otherwise, build a param string
-				} else if (params && (typeof params === "undefined" ? "undefined" : _typeof(params)) === "object") {
+				} else if (params && (typeof params === 'undefined' ? 'undefined' : _typeof(params)) === "object") {
 					type = "POST";
 				}
 
@@ -9882,6 +9832,181 @@ var shouty = function () {
 		});
 	});
 
+	var utils = {
+		/**
+   * @name dateToString
+   * @description
+   * converts a javascript date to a date-time string in the ISO 8601 format
+   *
+   * ### Fri Jan 19 2018 05:08:48 GMT+0100 (CET)
+   * ### gets...
+   * ### "2018-01-19T05:08:48"
+   *
+   * @param {Date} date a javascript date object
+   * @returns {string} date-time string
+   */
+		dateToString: function dateToString(date) {
+			return date.getFullYear() + '-' + (date.getMonth() + 1).toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + '-' + date.getDate().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + 'T' + date.getHours().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + ':' + date.getMinutes().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + ':' + date.getSeconds().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			});
+		},
+
+
+		/**
+   * @name dateToChatTime
+   * @description
+   * converts a javascript date to a date-time string for the shoutbox chat
+   *
+   * ### Fri Jan 19 2018 05:08:48 GMT+0100 (CET)
+   * ### gets...
+   * ### "19.01.2018\n05:08:48"
+   *
+   * @param {Date} date a javascript date object
+   * @returns {string} date-time string with line break
+   */
+		dateToChatTime: function dateToChatTime(date) {
+			return date.getDate().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + '.' + (date.getMonth() + 1).toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + '.' + date.getFullYear() + '\n' + date.getHours().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + ':' + date.getMinutes().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			}) + ':' + date.getSeconds().toLocaleString("de", {
+				minimumIntegerDigits: 2
+			});
+		},
+		dataUriToBlob: function dataUriToBlob(dataUri) {
+			// convert base64 dataURI to raw binary data held in a string
+			var byteString = void 0;
+			if (dataUri.split(",")[0].indexOf("base64") >= 0) {
+				byteString = atob(dataUri.split(",")[1]);
+			} else {
+				byteString = unescape(dataUri.split(",")[1]);
+			}
+
+			// separate out the mime component
+			var mimeString = dataUri.split(",")[0].split(":")[1].split(";")[0];
+
+			// write the bytes of the string to a typed array
+			var ia = new Uint8Array(byteString.length);
+			for (var i = 0; i < byteString.length; i++) {
+				ia[i] = byteString.charCodeAt(i);
+			}
+
+			return new Blob([ia], {
+				type: mimeString
+			});
+		}
+	};
+
+	/**
+  * @ngdoc function
+  * @name StartCtrl
+  * @description
+  * @param {any} $scope angular scope
+  * @param {any} $http angular $http service
+  * @ngInject
+  */
+	var StartCtrl = function StartCtrl($scope, $http) {
+		$scope.name = "start";
+
+		// $scope.getMessages = () => {
+		// 	$http.get("messages.json").then((response) => {
+		// 		$scope.messages = response.data;
+
+		// 		$scope.messages.forEach((message) => {
+		// 			message.chatTime = utils.dateToChatTime(new Date(message.time));
+		// 		});
+
+		// 		$scope.$applyAsync();
+		// 	});
+		// };
+
+		if (window.EventSource) {
+			var source = new EventSource("/stream");
+
+			source.addEventListener("message", function (e) {
+				$scope.messages = JSON.parse(e.data);
+				$scope.$applyAsync();
+			}, false);
+		} else {
+			console.log("Your browser doesn't support SSE");
+		}
+
+		// $scope.getMessages();
+
+
+		$scope.username = "";
+		$scope.message = "";
+
+		$scope.test = function () {
+			return !jquery("input").hasClass("ng-empty");
+		};
+
+		$scope.postMessage = function (message) {
+			$http.post("/", message).then(function (response) {
+				if (response.data === "success") {
+					jquery("#message-input").removeClass("ng-touched");
+					$scope.message = "";
+					// $scope.getMessages();
+				}
+			});
+		};
+
+		$scope.sendMessage = function () {
+			if ($scope.test()) {
+				var date = new Date();
+
+				var message = {
+					username: $scope.username,
+					message: $scope.message,
+					time: utils.dateToString(date),
+					chatTime: utils.dateToChatTime(date)
+				};
+
+				if ($scope.image) {
+					message.image = {
+						name: date.getTime() + '.' + $scope.image.file.type.replace(/(.*?)\//, ""),
+						file: $scope.image.resized.dataURL.split(",")[1]
+					};
+				}
+
+				$scope.postMessage(message);
+			} else {
+				jquery("input").each(function (index, element) {
+					if (jquery(element).hasClass("ng-empty")) {
+						jquery(element).addClass("ng-touched");
+					}
+				});
+			}
+		};
+
+		window[$scope.name + 'Scope'] = $scope;
+	};
+
+	/**
+  * @ngdoc function
+  * @name LoginCtrl
+  * @description
+  * @param {any} $scope angular scope
+  * @ngInject
+  */
+	var LoginCtrl = function LoginCtrl($scope) {
+		$scope.name = "login";
+
+		window[$scope.name + 'Scope'] = $scope;
+	};
+
 	/**
   * @ngdoc function
   * @name NavCtrl
@@ -9897,43 +10022,73 @@ var shouty = function () {
 
 		$transitions.onStart({}, function (transition) {
 			if (transition.from().name !== "") {
-				jquery("a[href=" + transition.from().name + "]").removeClass("active");
+				jquery('a[href=' + transition.from().name + ']').removeClass("active");
 			}
 
-			jquery("a[href=" + transition.to().name + "]").addClass("active");
+			jquery('a[href=' + transition.to().name + ']').addClass("active");
 
 			return true;
 		});
 
-		window[$scope.name + "Scope"] = $scope;
+		window[$scope.name + 'Scope'] = $scope;
 	};
 
-	var Controllers = {
+	var controllers = {
 		StartCtrl: StartCtrl,
 		LoginCtrl: LoginCtrl,
 		NavCtrl: NavCtrl
 	};
 
-	var cwd$1 = window.location.pathname;
+	/**
+  * @name ngEnter
+  * @returns {function}
+  * directive function
+  * @ngInject
+  */
+	var ngEnter = function ngEnter() {
+		return function (scope, element, attrs) {
+			element.bind("keydown keypress", function (event) {
+				if (event.which === 13) {
+					scope.$apply(function () {
+						scope.$eval(attrs.ngEnter);
+					});
+					event.preventDefault();
+				}
+			});
+		};
+	};
+
+	var directives = {
+		ngEnter: ngEnter
+	};
+
+	var map = {
+		controllers: controllers,
+		directives: directives
+	};
+
+	var cwd = window.location.pathname;
 
 	/**
-  * @name shoutyApp
+  * @name ShoutyCfg
   * @description
-  * # shoutyApp
+  * config of the main angular module
   *
-  * Main module of the application.
+  * @param {any} $locationProvider ui.router $locationProvider
+  * @param {any} $stateProvider ui.router $stateProvider
+  * @param {any} $urlRouterProvider ui.router $stateProvider
   */
-	var shoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router"]).config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function ($locationProvider, $stateProvider, $urlRouterProvider) {
+	var ShoutyCfg = function ShoutyCfg($locationProvider, $stateProvider, $urlRouterProvider) {
 		var startState = {
 			name: "start",
-			url: "" + cwd$1,
-			templateUrl: cwd$1 + "views/start.html",
+			url: '' + cwd,
+			templateUrl: cwd + 'views/start.html',
 			controller: "StartCtrl"
 		};
 		var loginState = {
 			name: "login",
-			url: cwd$1 + "login",
-			templateUrl: cwd$1 + "views/login.html",
+			url: cwd + 'login',
+			templateUrl: cwd + 'views/login.html',
 			controller: "LoginCtrl"
 		};
 
@@ -9946,22 +10101,213 @@ var shouty = function () {
 			enabled: true,
 			requireBase: false
 		});
-	}]).directive("ngEnter", function () {
-		return function (scope, element, attrs) {
-			element.bind("keydown keypress", function (event) {
-				if (event.which === 13) {
-					scope.$apply(function () {
-						scope.$eval(attrs.ngEnter);
-					});
-					event.preventDefault();
-				}
-			});
+	};
+
+	ShoutyCfg.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
+	/**
+  * @name image
+  *
+  * @param {any} $q
+  * angular $q service
+  * @returns {object}
+  * angular directive
+  */
+	var image = function image($q) {
+		var URL = window.URL || window.webkitURL;
+
+		/**
+   * @name getResizeArea
+   *
+   * @returns {object} element that represents the resize area
+   */
+		var getResizeArea = function getResizeArea() {
+			var resizeAreaId = "fileupload-resize-area";
+
+			var resizeArea = document.getElementById(resizeAreaId);
+
+			if (!resizeArea) {
+				resizeArea = document.createElement("canvas");
+				resizeArea.id = resizeAreaId;
+				resizeArea.style.visibility = "hidden";
+				resizeArea.style.position = "absolute";
+				resizeArea.style.top = "-300px";
+				document.body.appendChild(resizeArea);
+			}
+
+			return resizeArea;
 		};
+
+		/**
+   * @name resizeImage
+   *
+   * @param {image} origImage
+   * image
+   * @param {object} options
+   * options for resizing the image
+   * @returns {string} dataUrl of canvas
+   */
+		var resizeImage = function resizeImage(origImage, options) {
+			var maxHeight = options.resizeMaxHeight || 300;
+			var maxWidth = options.resizeMaxWidth || 250;
+			var quality = options.resizeQuality || 0.7;
+			var type = options.resizeType || "image/jpg";
+
+			var canvas = getResizeArea();
+
+			var height = origImage.height;
+			var width = origImage.width;
+
+			// calculate the width and height, constraining the proportions
+			if (width > height) {
+				if (width > maxWidth) {
+					height = Math.round(height *= maxWidth / width);
+					width = maxWidth;
+				}
+			} else if (height > maxHeight) {
+				width = Math.round(width *= maxHeight / height);
+				height = maxHeight;
+			}
+
+			canvas.width = width;
+			canvas.height = height;
+
+			// draw image on canvas
+			var ctx = canvas.getContext("2d");
+			ctx.drawImage(origImage, 0, 0, width, height);
+
+			// get the data from canvas as 70% jpg (or specified type).
+			return canvas.toDataURL(type, quality);
+		};
+
+		/**
+   * @name createImage
+   *
+   * @param {string} url
+   * url of image
+   * @param {function} callback
+   * function that gets called after the image is loaded
+   */
+		var createImage = function createImage(url, callback) {
+			var imageFile = new Image();
+			imageFile.onload = function () {
+				callback(imageFile);
+			};
+			imageFile.src = url;
+		};
+
+		/**
+   * @name fileToDataURL
+   *
+   * @param {file} file
+   * file
+   * @returns {promise}
+   * promise that resolves to the dataUrl of the file
+   */
+		var fileToDataURL = function fileToDataURL(file) {
+			var deferred = $q.defer();
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				deferred.resolve(e.target.result);
+			};
+			reader.readAsDataURL(file);
+			return deferred.promise;
+		};
+
+		return {
+			restrict: "A",
+			scope: {
+				image: "=",
+				resizeMaxHeight: "@?",
+				resizeMaxWidth: "@?",
+				resizeQuality: "@?",
+				resizeType: "@?"
+			},
+			link: function link(scope, element) {
+				/**
+     * @name resize
+     *
+     * @param {object} imageResult
+     * imageResult object
+     * @param {function} callback
+     * function that gets called after the resized image is created
+     */
+				var resize = function resize(imageResult, callback) {
+					createImage(imageResult.url, function (imageFile) {
+						var dataURL = resizeImage(imageFile, scope);
+						imageResult.resized = {
+							dataURL: dataURL,
+							type: dataURL.match(/:(.+\/.+);/)[1]
+						};
+						callback(imageResult);
+					});
+				};
+
+				/**
+     * @name applyScope
+     *
+     * @param {object} imageResult
+     * imageResult object
+     */
+				var applyScope = function applyScope(imageResult) {
+					scope.$apply(function () {
+						scope.image = imageResult;
+					});
+				};
+
+				element.bind("change", function (evt) {
+					var files = evt.target.files;
+
+					var imageResult = {
+						file: files[0],
+						url: URL.createObjectURL(files[0])
+					};
+
+					fileToDataURL(files[0]).then(function (dataURL) {
+						imageResult.dataURL = dataURL;
+					});
+
+					if (scope.resizeMaxHeight || scope.resizeMaxWidth) {
+						// resize image
+						resize(imageResult, function (result) {
+							applyScope(result);
+						});
+					} else {
+						// no resizing
+						applyScope(imageResult);
+					}
+				});
+			}
+		};
+	};
+
+	var directives$2 = {
+		image: image
+	};
+
+	var map$2 = {
+		directives: directives$2
+	};
+
+	var ngImage = angular.module("ngImage", []);
+
+	Object.keys(map$2).forEach(function (key) {
+		Object.keys(map$2[key]).forEach(function (name) {
+			ngImage[key.slice(0, -1)](name, map$2[key][name]);
+		});
 	});
 
-	Object.keys(Controllers).forEach(function (name) {
-		shoutyApp.controller(name, Controllers[name]);
+	/**
+  * @name ShoutyApp
+  * @description
+  * main module of the application.
+  */
+	var ShoutyApp = angular.module("shoutyApp", ["ngAnimate", "ngAria", "ngCookies", "ngMessages", "ngResource", "ngRoute", "ngSanitize", "ngTouch", "ui.router", "ngImage"]).config(ShoutyCfg);
+
+	Object.keys(map).forEach(function (key) {
+		Object.keys(map[key]).forEach(function (name) {
+			ShoutyApp[key.slice(0, -1)](name, map[key][name]);
+		});
 	});
 
-	return shoutyApp;
+	return ShoutyApp;
 }();
