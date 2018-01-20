@@ -16,9 +16,6 @@ const StartCtrl = function($scope, $http) {
 	// 	$http.get("messages.json").then((response) => {
 	// 		$scope.messages = response.data;
 
-	// 		$scope.messages.forEach((message) => {
-	// 			message.chatTime = utils.dateToChatTime(new Date(message.time));
-	// 		});
 
 	// 		$scope.$applyAsync();
 	// 	});
@@ -29,6 +26,9 @@ const StartCtrl = function($scope, $http) {
 
 		source.addEventListener("message", (e) => {
 			$scope.messages = JSON.parse(e.data);
+			$scope.messages.forEach((message) => {
+				message.chatTime = utils.dateToChatTime(new Date(message.time));
+			});
 			$scope.$applyAsync();
 		}, false);
 	}
