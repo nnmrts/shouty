@@ -12,19 +12,31 @@ import utils from "../utils.js";
 const StartCtrl = function($scope, $http) {
 	$scope.name = "start";
 
-	$scope.getMessages = () => {
-		$http.get("messages.json").then((response) => {
-			$scope.messages = response.data;
+	// $scope.getMessages = () => {
+	// 	$http.get("messages.json").then((response) => {
+	// 		$scope.messages = response.data;
 
-			$scope.messages.forEach((message) => {
-				message.chatTime = utils.dateToChatTime(new Date(message.time));
-			});
+	// 		$scope.messages.forEach((message) => {
+	// 			message.chatTime = utils.dateToChatTime(new Date(message.time));
+	// 		});
 
+	// 		$scope.$applyAsync();
+	// 	});
+	// };
+
+	if (window.EventSource) {
+		const source = new EventSource("/stream");
+
+		source.addEventListener("message", (e) => {
+			$scope.messages = JSON.parse(e.data);
 			$scope.$applyAsync();
-		});
-	};
+		}, false);
+	}
+	else {
+		console.log("Your browser doesn't support SSE");
+	}
 
-	$scope.getMessages();
+	// $scope.getMessages();
 
 
 	$scope.username = "";
@@ -37,7 +49,7 @@ const StartCtrl = function($scope, $http) {
 			if (response.data === "success") {
 				$("#message-input").removeClass("ng-touched");
 				$scope.message = "";
-				$scope.getMessages();
+				// $scope.getMessages();
 			}
 		});
 	};
@@ -58,12 +70,9 @@ const StartCtrl = function($scope, $http) {
 					name: `${date.getTime()}.${$scope.image.file.type.replace(/(.*?)\//, "")}`,
 					file: $scope.image.resized.dataURL.split(",")[1]
 				};
+			}
 
-				$scope.postMessage(message);
-			}
-			else {
-				$scope.postMessage(message);
-			}
+			$scope.postMessage(message);
 		}
 		else {
 			$("input").each((index, element) => {
