@@ -46,15 +46,12 @@ const StartCtrl = function($scope, $http) {
 	$scope.test = () => !$("input").hasClass("ng-empty");
 
 	$scope.postMessage = (message) => {
-		$http.post("/", message).then((response) => {
-			if (response.data === "success") {
-				$("#message-input").removeClass("ng-touched");
-				$scope.message = "";
-				$scope.image = "";
+		$http.post("/", message).then(() => {
+			$("#message-input").removeClass("ng-touched");
+			$scope.message = "";
+			$scope.image = "";
 
-				$scope.$applyAsync();
-				// $scope.getMessages();
-			}
+			$scope.$applyAsync();
 		});
 	};
 
