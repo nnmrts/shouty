@@ -9924,9 +9924,6 @@ var shouty = function () {
 		// 	$http.get("messages.json").then((response) => {
 		// 		$scope.messages = response.data;
 
-		// 		$scope.messages.forEach((message) => {
-		// 			message.chatTime = utils.dateToChatTime(new Date(message.time));
-		// 		});
 
 		// 		$scope.$applyAsync();
 		// 	});
@@ -9937,6 +9934,9 @@ var shouty = function () {
 
 			source.addEventListener("message", function (e) {
 				$scope.messages = JSON.parse(e.data);
+				$scope.messages.forEach(function (message) {
+					message.chatTime = utils.dateToChatTime(new Date(message.time));
+				});
 				$scope.$applyAsync();
 			}, false);
 		} else {
