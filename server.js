@@ -91,7 +91,7 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 					console.log(err);
 				}
 
-				addToMessages(req, res, message, newMessages);
+				return addToMessages(req, res, message, newMessages);
 			});
 		}
 
