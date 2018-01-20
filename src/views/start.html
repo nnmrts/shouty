@@ -2,7 +2,7 @@
 	<div id="chat">
 		<div class="message-body" ng-repeat="message in messages">
 			<span class="username">{{message.username}}</span>
-			<span class="message">{{message.message}}</span>
+			<span class="message" ng-bind-html="message.message | betterLinky"></span>
 			<img ng-if="message.image" ng-src="{{message.image}}">
 			<span class="time">{{message.chatTime}}</span>
 		</div>
