@@ -22,17 +22,18 @@ div#start {
 				font-size: 1.7vw;
 				white-space: pre-wrap;
 				word-wrap: break-word;
+				position: relative;
 				&:nth-child(even) {
 					background-color: rgba($thiColor, 0.2)
 				}
 				>span.username {
-					width: calc(25% - 5px - 1vw);
+					width: calc(25% - 1vw - 5px);
 				}
 				>span.message {
-					width: calc(60% - 10px - 1vw);
+					width: calc(60% - 2vw - 5px);
 				}
 				>span.time {
-					width: calc(15% - 5px - 1vw);
+					width: 15%;
 					font-size: 1vw;
 					text-align: center;
 					font-weight: 500;
@@ -64,24 +65,49 @@ div#start {
 				}
 				&#message-input {
 					width: 75%;
-					padding: 1vw 4vw 1vw 1vw;
+					padding: 1vw 8vw 1vw 1vw;
 				}
 				@include font;
 			}
-			>button {
+			>img#image {
+				position: absolute;
+				right: 3vw;
+				bottom: 4vw;
+				width: 6vw;
+				background-color: white;
+				padding: 1vw;
+				border-radius: 5px;
+				box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
+			}
+			>label, button {
 				position: absolute;
 				bottom: 0px;
-				right: 0%;
-				height: 100%;
+				right: 0px;
+				height: calc(100% - 2vw);
 				background: none;
 				border: none;
-				padding: 1vw;
+				margin: 1vw 1vw 1vw 0vw;
 				color: $thiColor;
 				font-family: "Material Design Icons";
 				font-size: 2vw;
 				outline: none;
-				>span {
-					cursor: pointer;
+				cursor: pointer;
+				&[for="image"] {
+					right: 4vw;
+					overflow: hidden;
+					>input#image-upload {
+						cursor: inherit;
+						display: block;
+						font-size: 999px;
+						filter: alpha(opacity=0);
+						min-height: 100%;
+						min-width: 100%;
+						opacity: 0;
+						position: absolute;
+						right: 0;
+						text-align: right;
+						top: 0;
+					}
 				}
 			}
 		}
