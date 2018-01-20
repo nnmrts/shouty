@@ -40,7 +40,7 @@ const StartCtrl = function($scope, $http) {
 			$scope.message = "";
 			$scope.image = "";
 
-			$scope.$apply();
+			$scope.$applyAsync();
 		});
 	};
 
