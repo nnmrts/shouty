@@ -91,11 +91,12 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 					console.log(err);
 				}
 
-				return addToMessages(req, res, message, newMessages);
+				addToMessages(req, res, message, newMessages);
 			});
 		}
-
-		addToMessages(req, res, message, newMessages);
+		else {
+			addToMessages(req, res, message, newMessages);
+		}
 	});
 
 	app.get("/stream", (req, res) => {
