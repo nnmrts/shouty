@@ -1,11 +1,12 @@
 {
+	"compact": false,
 	"presets": [
 		[
 			"env",
 			{
 				"targets": {
 					"browsers": [
-						"> 0.1%"
+						"> 0.01%"
 					]
 				}
 			}
