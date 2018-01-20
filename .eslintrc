@@ -116,7 +116,11 @@
 				"preferType": {
 					"Boolean": "boolean",
 					"Number": "number",
-					"String": "string"
+					"String": "string",
+					"Object": "object",
+					"Array": "array",
+					"Image": "image",
+					"Function": "func"
 				},
 				"requireReturn": false,
 				"requireReturnType": true,
