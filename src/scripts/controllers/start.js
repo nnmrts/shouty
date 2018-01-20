@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { dateToString, dateToChatTime } from "../utils.js";
+import utils from "../utils.js";
 
 /**
  * @ngdoc function
@@ -7,45 +7,63 @@ import { dateToString, dateToChatTime } from "../utils.js";
  * @description
  * @param {any} $scope angular scope
  * @param {any} $http angular $http service
- * @param {any} fileUpload angular $http service
  * @ngInject
  */
-const StartCtrl = function($scope, $http, fileUpload) {
+const StartCtrl = function($scope, $http) {
 	$scope.name = "start";
 
-	$http.get("messages.json").then((response) => {
-		$scope.messages = response.data;
+	$scope.getMessages = () => {
+		$http.get("messages.json").then((response) => {
+			$scope.messages = response.data;
 
-		$scope.messages.forEach((message) => {
-			message.chatTime = dateToChatTime(new Date(message.time));
+			$scope.messages.forEach((message) => {
+				message.chatTime = utils.dateToChatTime(new Date(message.time));
+			});
+
+			$scope.$applyAsync();
 		});
+	};
 
-		$scope.$applyAsync();
-	});
+	$scope.getMessages();
+
 
 	$scope.username = "";
 	$scope.message = "";
 
 	$scope.test = () => !$("input").hasClass("ng-empty");
 
+	$scope.postMessage = (message) => {
+		$http.post("/", message).then((response) => {
+			if (response.data === "success") {
+				$("#message-input").removeClass("ng-touched");
+				$scope.message = "";
+				$scope.getMessages();
+			}
+		});
+	};
+
 	$scope.sendMessage = () => {
 		if ($scope.test()) {
-			$http.post("/", {
+			const date = new Date();
+
+			const message = {
 				username: $scope.username,
 				message: $scope.message,
-				time: dateToString(new Date()),
-				chatTime: dateToChatTime(new Date())
-			}).then((response) => {
-				if (response.data === "success") {
-					$("#message-input").removeClass("ng-touched");
-					$scope.message = "";
-					$http.get("messages.json").then((innerResponse) => {
-						$scope.messages = innerResponse.data;
+				time: utils.dateToString(date),
+				chatTime: utils.dateToChatTime(date)
+			};
 
-						$scope.$applyAsync();
-					});
-				}
-			});
+			if ($scope.image) {
+				message.image = {
+					name: `${date.getTime()}.${$scope.image.file.type.replace(/(.*?)\//, "")}`,
+					file: $scope.image.resized.dataURL.split(",")[1]
+				};
+
+				$scope.postMessage(message);
+			}
+			else {
+				$scope.postMessage(message);
+			}
 		}
 		else {
 			$("input").each((index, element) => {
@@ -54,12 +72,6 @@ const StartCtrl = function($scope, $http, fileUpload) {
 				}
 			});
 		}
-	};
-
-	$scope.uploadFile = function() {
-		const file = $scope.myFile;
-		const uploadUrl = "/savedata";
-		fileUpload.uploadFileToUrl(file, uploadUrl);
 	};
 
 	window[`${$scope.name}Scope`] = $scope;

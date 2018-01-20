@@ -3,12 +3,21 @@
 		<div class="message-body" ng-repeat="message in messages">
 			<span class="username">{{message.username}}</span>
 			<span class="message">{{message.message}}</span>
+			<img ng-if="message.image" ng-src="{{message.image}}">
 			<span class="time">{{message.chatTime}}</span>
 		</div>
 	</div>
 	<div id="footer">
-		<input id="username-input" placeholder="username" maxlength="20" ng-model="username"></input>
-		<input id="message-input" placeholder="shout something" maxlength="80" ng-model="message"></input>
+		<input id="username-input" placeholder="username" maxlength="20" ng-model="username">
+		<input id="message-input" placeholder="shout something" maxlength="80" ng-model="message">
+
+
+		<label for="image">
+			<span class="mdi mdi-image"></span>
+
+			<input id="image-upload" name="image" type="file" accept="image/*" image="image" resize-max-height="150" resize-max-height="250" resize-quality="0.7">
+		</label>
+		<img id="image" ng-show="image" ng-src="{{image.resized.dataURL}}">
 		<button ng-click="sendMessage()">
 			<span class="mdi mdi-send"></span>
 		</button>
