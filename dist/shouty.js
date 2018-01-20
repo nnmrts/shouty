@@ -9920,15 +9920,6 @@ var shouty = function () {
 	var StartCtrl = function StartCtrl($scope, $http) {
 		$scope.name = "start";
 
-		// $scope.getMessages = () => {
-		// 	$http.get("messages.json").then((response) => {
-		// 		$scope.messages = response.data;
-
-
-		// 		$scope.$applyAsync();
-		// 	});
-		// };
-
 		if (window.EventSource) {
 			var source = new EventSource("/stream");
 
@@ -9942,9 +9933,6 @@ var shouty = function () {
 		} else {
 			console.log("Your browser doesn't support SSE");
 		}
-
-		// $scope.getMessages();
-
 
 		$scope.username = "";
 		$scope.message = "";
@@ -9960,7 +9948,7 @@ var shouty = function () {
 				$scope.message = "";
 				$scope.image = "";
 
-				$scope.$applyAsync();
+				$scope.$apply();
 			});
 		};
 
