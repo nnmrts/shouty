@@ -74,6 +74,8 @@ const addToMessages = (req, res, message, messages) => {
 		connections.forEach((connection) => {
 			connection.sseSend(messages);
 		});
+
+		res.send("success");
 	});
 };
 
