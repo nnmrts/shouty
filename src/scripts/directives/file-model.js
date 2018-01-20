@@ -2,7 +2,7 @@
  * @name fileModel
  *
  * @param {any} $parse angular $parse service
- * @returns {Object} service object
+ * @returns {object} service object
  */
 const fileModel = $parse => ({
 	restrict: "A",

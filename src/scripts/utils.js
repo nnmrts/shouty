@@ -75,19 +75,6 @@ const utils = {
 		], {
 			type: mimeString
 		});
-	},
-	uploadImage(image, fileUpload, filename) {
-		let file = image;
-
-		switch (typeof image) {
-			case "string":
-				file = this.dataUriToBlob(image);
-				break;
-			default:
-				break;
-		}
-		const uploadUrl = "/image";
-		return fileUpload.uploadFileToUrl(file, uploadUrl, filename);
 	}
 };
 
