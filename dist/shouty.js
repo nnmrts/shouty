@@ -9948,7 +9948,7 @@ var shouty = function () {
 				$scope.message = "";
 				$scope.image = "";
 
-				$scope.$apply();
+				$scope.$applyAsync();
 			});
 		};
 
