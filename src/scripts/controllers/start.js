@@ -12,15 +12,6 @@ import utils from "../utils.js";
 const StartCtrl = function($scope, $http) {
 	$scope.name = "start";
 
-	// $scope.getMessages = () => {
-	// 	$http.get("messages.json").then((response) => {
-	// 		$scope.messages = response.data;
-
-
-	// 		$scope.$applyAsync();
-	// 	});
-	// };
-
 	if (window.EventSource) {
 		const source = new EventSource("/stream");
 
@@ -36,8 +27,6 @@ const StartCtrl = function($scope, $http) {
 		console.log("Your browser doesn't support SSE");
 	}
 
-	// $scope.getMessages();
-
 
 	$scope.username = "";
 	$scope.message = "";
@@ -51,7 +40,7 @@ const StartCtrl = function($scope, $http) {
 			$scope.message = "";
 			$scope.image = "";
 
-			$scope.$applyAsync();
+			$scope.$apply();
 		});
 	};
 
