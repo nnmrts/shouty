@@ -1,5 +1,6 @@
 import map from "./map.js";
 import ShoutyCfg from "./cfg.js";
+import "./modules/ng-image/ng-image.js";
 
 /**
  * @name ShoutyApp
@@ -16,7 +17,8 @@ const ShoutyApp = angular
 		"ngRoute",
 		"ngSanitize",
 		"ngTouch",
-		"ui.router"
+		"ui.router",
+		"ngImage"
 	])
 	.config(ShoutyCfg);
 
