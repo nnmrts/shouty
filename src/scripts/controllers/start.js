@@ -49,6 +49,9 @@ const StartCtrl = function($scope, $http) {
 			if (response.data === "success") {
 				$("#message-input").removeClass("ng-touched");
 				$scope.message = "";
+				$scope.image = "";
+
+				$scope.$applyAsync();
 				// $scope.getMessages();
 			}
 		});
@@ -65,7 +68,7 @@ const StartCtrl = function($scope, $http) {
 				chatTime: utils.dateToChatTime(date)
 			};
 
-			if ($scope.image) {
+			if ($scope.image !== null) {
 				message.image = {
 					name: `${date.getTime()}.${$scope.image.file.type.replace(/(.*?)\//, "")}`,
 					file: $scope.image.resized.dataURL.split(",")[1]

@@ -26,59 +26,72 @@ app.use(sse);
 
 app.enable("trust proxy");
 
+/**
+ * @name addToMessages
+ *
+ * @param {object} req
+ * server request object
+ * @param {object} res
+ * server response object
+ * @param {object} message
+ * message object
+ * @param {array} messages
+ * messages array
+ * @returns {promise}
+ * promise that resolves after messages.json is saved
+ */
+const addToMessages = (req, res, message, messages) => {
+	messages.push(Object.assign((() => {
+		delete message.chatTime;
+		if (message.image !== null) {
+			message.image = `images/${message.image.name}`;
+		}
+
+		return message;
+	})(), {
+		ip: req.ip,
+		useragent: {
+			browser: {
+				name: useragent.parse(req.headers["user-agent"]).browser,
+				version: useragent.parse(req.headers["user-agent"]).version
+			},
+			platform: {
+				name: useragent.parse(req.headers["user-agent"]).platform,
+				os: useragent.parse(req.headers["user-agent"]).os
+			},
+			source: useragent.parse(req.headers["user-agent"]).source
+		}
+	}));
+
+	while (messages.length > 8) {
+		messages.shift();
+	}
+
+	return jsonfile.writeFile("./dist/messages.json", messages, (innerError) => {
+		if (innerError) {
+			console.log(innerError);
+		}
+		connections.forEach((connection) => {
+			connection.sseSend(messages);
+		});
+	});
+};
+
 jsonfile.readFile("./dist/messages.json", (error, messages) => {
 	const newMessages = messages;
 
 	app.post("/", (req, res) => {
 		const message = req.body;
 
-		console.log(message);
-
-		fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
-			if (err) {
-				return console.log(err);
-			}
-
-			console.log("The file was saved!");
-
-
-			newMessages.push(Object.assign((() => {
-				delete message.chatTime;
-				message.image = `images/${message.image.name}`;
-
-				return message;
-			})(), {
-				ip: req.ip,
-				useragent: {
-					browser: {
-						name: useragent.parse(req.headers["user-agent"]).browser,
-						version: useragent.parse(req.headers["user-agent"]).version
-					},
-					platform: {
-						name: useragent.parse(req.headers["user-agent"]).platform,
-						os: useragent.parse(req.headers["user-agent"]).os
-					},
-					source: useragent.parse(req.headers["user-agent"]).source
+		if (message.image !== null) {
+			fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
+				if (err) {
+					console.log(err);
 				}
-			}));
 
-			while (newMessages.length > 8) {
-				newMessages.shift();
-			}
-
-			return jsonfile.writeFile("./dist/messages.json", newMessages, (innerError) => {
-				if (innerError) {
-					return console.log(innerError);
-				}
-				connections.forEach((connection) => {
-					connection.sseSend(newMessages);
-				});
-
-				// res.sendStatus(200);
-
-				// return res.send("success");
+				addToMessages(req, res, message, newMessages);
 			});
-		});
+		}
 	});
 
 	app.get("/stream", (req, res) => {
