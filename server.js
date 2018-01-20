@@ -64,7 +64,14 @@ const addToMessages = (req, res, message, messages) => {
 	}));
 
 	while (messages.length > 8) {
-		messages.shift();
+		if (messages[0].image) {
+			fs.unlink(message.image, () => {
+				messages.shift();
+			});
+		}
+		else {
+			messages.shift();
+		}
 	}
 
 	return jsonfile.writeFile("./dist/messages.json", messages, (innerError) => {
