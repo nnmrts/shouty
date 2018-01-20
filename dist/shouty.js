@@ -9958,6 +9958,9 @@ var shouty = function () {
 				if (response.data === "success") {
 					jquery("#message-input").removeClass("ng-touched");
 					$scope.message = "";
+					$scope.image = "";
+
+					$scope.$applyAsync();
 					// $scope.getMessages();
 				}
 			});
@@ -9974,7 +9977,7 @@ var shouty = function () {
 					chatTime: utils.dateToChatTime(date)
 				};
 
-				if ($scope.image) {
+				if ($scope.image !== null) {
 					message.image = {
 						name: date.getTime() + '.' + $scope.image.file.type.replace(/(.*?)\//, ""),
 						file: $scope.image.resized.dataURL.split(",")[1]
