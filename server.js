@@ -43,7 +43,7 @@ app.enable("trust proxy");
 const addToMessages = (req, res, message, messages) => {
 	messages.push(Object.assign((() => {
 		delete message.chatTime;
-		if (message.image !== null) {
+		if (message.image) {
 			message.image = `images/${message.image.name}`;
 		}
 
@@ -83,7 +83,9 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 	app.post("/", (req, res) => {
 		const message = req.body;
 
-		if (message.image !== null) {
+		console.log(message.image);
+
+		if (message.image) {
 			fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
 				if (err) {
 					console.log(err);
@@ -92,6 +94,8 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 				addToMessages(req, res, message, newMessages);
 			});
 		}
+
+		addToMessages(req, res, message, newMessages);
 	});
 
 	app.get("/stream", (req, res) => {
