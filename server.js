@@ -28,7 +28,7 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 
 		console.log(message);
 
-		fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
+		fs.writeFile(`${__dirname}/dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
 			if (err) {
 				return console.log(err);
 			}
