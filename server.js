@@ -2,9 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jsonfile = require("jsonfile");
 const useragent = require("express-useragent");
-const multer = require("multer");
 const fs = require("fs");
 const sse = require("./sse.js");
+const mkdirp = require("mkdirp");
+
+mkdirp("/dist/images/", (err) => {
+	if (err) {
+		console.error(err);
+	}
+});
 
 const app = express();
 const connections = [];
@@ -28,7 +34,7 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 
 		console.log(message);
 
-		fs.writeFile(`${__dirname}/dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
+		fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
 			if (err) {
 				return console.log(err);
 			}
