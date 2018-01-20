@@ -38,7 +38,7 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 
 			newMessages.push(Object.assign((() => {
 				delete message.chatTime;
-				message.image = message.image.name;
+				message.image = `images/${message.image.name}`;
 
 				return message;
 			})(), {
@@ -68,9 +68,9 @@ jsonfile.readFile("./dist/messages.json", (error, messages) => {
 					connection.sseSend(newMessages);
 				});
 
-				res.sendStatus(200);
+				// res.sendStatus(200);
 
-				return res.send("success");
+				// return res.send("success");
 			});
 		});
 	});
