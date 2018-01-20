@@ -6,7 +6,7 @@ const fs = require("fs");
 const sse = require("./sse.js");
 const mkdirp = require("mkdirp");
 
-mkdirp("/dist/images/", (err) => {
+mkdirp("./dist/images/", (err) => {
 	if (err) {
 		console.error(err);
 	}
