@@ -41,6 +41,7 @@ const StartCtrl = function($scope, $http) {
 
 	$scope.username = "";
 	$scope.message = "";
+	$scope.image = "";
 
 	$scope.test = () => !$("input").hasClass("ng-empty");
 
@@ -68,7 +69,7 @@ const StartCtrl = function($scope, $http) {
 				chatTime: utils.dateToChatTime(date)
 			};
 
-			if ($scope.image !== null) {
+			if ($scope.image !== "") {
 				message.image = {
 					name: `${date.getTime()}.${$scope.image.file.type.replace(/(.*?)\//, "")}`,
 					file: $scope.image.resized.dataURL.split(",")[1]
