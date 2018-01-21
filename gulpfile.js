@@ -31,7 +31,8 @@ const _ = require("lodash");
 const jeditor = require("gulp-json-editor");
 const GitHub = require("github-api");
 const childProcess = require("child_process");
-
+const builtins = require("rollup-plugin-node-builtins");
+const globals = require("rollup-plugin-node-globals");
 
 const pkg = require("./package.json");
 
@@ -66,6 +67,8 @@ gulp.task("rollup:browser", async() => {
 	const bundle = await rollup.rollup({
 		input: `${paths.src}/scripts/shouty.js`,
 		plugins: [
+			globals(),
+			builtins(),
 			resolve(),
 			commonjs(),
 			json({
@@ -107,7 +110,7 @@ gulp.task("minify:js", () =>
 		.pipe(gulp.dest(pkg.browser.replace("/shouty.js", ""))));
 
 gulp.task("build:js", gulp.series("rollup:browser", "babel"));
-gulp.task("dev:build:js", gulp.series("rollup:browser", "babel"));
+gulp.task("dev:build:js", gulp.series("rollup:browser"));
 
 gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
 	.pipe(sourcemaps.init({
@@ -197,19 +200,27 @@ gulp.task("dev:build", gulp.series("prepare", gulp.parallel(
 ), "clean:tmp"));
 
 gulp.task("watch", () => {
-	gulp.watch(`${paths.src}/**/*.js`, gulp.series("dev:build:js")).on("change", (srcPath) => {
+	gulp.watch(`${paths.src}/**/*.js`, {
+		interval: 1000
+	}, gulp.series("dev:build:js")).on("change", (srcPath) => {
 		gutil.log(`SRC: JS FILE CHANGED: ${srcPath}`);
 	});
 
-	gulp.watch(`${paths.src}/**/*.scss`, gulp.series("dev:build:css")).on("change", (srcPath) => {
+	gulp.watch(`${paths.src}/**/*.scss`, {
+		interval: 1000
+	}, gulp.series("dev:build:css")).on("change", (srcPath) => {
 		gutil.log(`SRC: SCSS FILE CHANGED: ${srcPath}`);
 	});
 
-	gulp.watch(`${paths.src}/**/*.html`, gulp.series("dev:build:html")).on("change", (srcPath) => {
+	gulp.watch(`${paths.src}/**/*.html`, {
+		interval: 1000
+	}, gulp.series("dev:build:html")).on("change", (srcPath) => {
 		gutil.log(`SRC: HTML FILE CHANGED: ${srcPath}`);
 	});
 
-	gulp.watch(`${paths.src}/{images/**/*,favicon.ico,robots.txt,messages.json}`, gulp.series("dev:build:misc")).on("change", (srcPath) => {
+	gulp.watch(`${paths.src}/{images/**/*,favicon.ico,robots.txt,messages.json}`, {
+		interval: 1000
+	}, gulp.series("dev:build:misc")).on("change", (srcPath) => {
 		gutil.log(`SRC: MISC FILE CHANGED: ${srcPath}`);
 	});
 });
