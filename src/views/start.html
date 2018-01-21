@@ -1,9 +1,12 @@
 <div id="shoutbox" ng-enter="sendMessage()">
 	<div id="chat">
-		<div class="message-body" ng-repeat="message in messages">
+		<div ng-class="['message-body', {'with-image': message.image}]" ng-repeat="message in messages">
 			<span class="username">{{message.username}}</span>
 			<span class="message" ng-bind-html="message.message | betterLinky"></span>
-			<img ng-if="message.image" ng-src="{{message.image}}">
+			<a ng-if="message.image" class="image" ng-href="{{message.image}}" target="_blank">
+				<span class="mdi mdi-open-in-new"></span>
+				<img ng-src="{{message.image}}">
+			</a>
 			<span class="time">{{message.chatTime}}</span>
 		</div>
 	</div>
@@ -15,9 +18,16 @@
 		<label for="image">
 			<span class="mdi mdi-image"></span>
 
-			<input id="image-upload" name="image" type="file" accept="image/*" image="image" resize-max-height="150" resize-max-height="250" resize-quality="0.7">
+			<input id="image-upload" ng-click="removeImage()" name="image" type="file" accept="image/*" ng-image="image" max-height="500" max-width="500" resize-quality="0.7">
 		</label>
-		<img id="image" ng-show="image" ng-src="{{image.resized.dataURL}}">
+		<div id="image-preview" ng-show="imagePreviewShown">
+			<img ng-src="{{image}}">
+			<div id="image-options">
+				<span ng-click="closeImagePreview()" class="mdi mdi-check"></span>
+				<span ng-click="removeImage()" class="mdi mdi-close"></span>
+			</div>
+		</div>
+
 		<button ng-click="sendMessage()">
 			<span class="mdi mdi-send"></span>
 		</button>

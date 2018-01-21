@@ -20,6 +20,10 @@ const StartCtrl = function($scope, $http) {
 			$scope.messages.forEach((message) => {
 				message.chatTime = utils.dateToChatTime(new Date(message.time));
 			});
+
+			$("#chat").stop().animate({
+				scrollTop: $("#chat")[0].scrollHeight
+			}, 800);
 			$scope.$applyAsync();
 		}, false);
 	}
@@ -32,7 +36,7 @@ const StartCtrl = function($scope, $http) {
 	$scope.message = "";
 	$scope.image = "";
 
-	$scope.test = () => !$("input").hasClass("ng-empty");
+	$scope.test = () => !$("#footer>input").hasClass("ng-empty");
 
 	$scope.postMessage = (message) => {
 		$http.post("/", message).then(() => {
@@ -57,20 +61,33 @@ const StartCtrl = function($scope, $http) {
 
 			if ($scope.image !== "") {
 				message.image = {
-					name: `${date.getTime()}.${$scope.image.file.type.replace(/(.*?)\//, "")}`,
-					file: $scope.image.resized.dataURL.split(",")[1]
+					name: `${date.getTime()}.png`,
+					file: $scope.image.split(",")[1]
 				};
 			}
 
 			$scope.postMessage(message);
 		}
 		else {
-			$("input").each((index, element) => {
+			$("#footer>input").each((index, element) => {
 				if ($(element).hasClass("ng-empty")) {
 					$(element).addClass("ng-touched");
 				}
 			});
 		}
+	};
+
+	$scope.openImagePreview = () => {
+		$scope.imagePreviewShown = true;
+	};
+
+	$scope.closeImagePreview = () => {
+		$scope.imagePreviewShown = false;
+	};
+
+	$scope.removeImage = () => {
+		$scope.image = "";
+		$scope.closeImagePreview();
 	};
 
 	window[`${$scope.name}Scope`] = $scope;
