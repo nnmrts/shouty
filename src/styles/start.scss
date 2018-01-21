@@ -26,11 +26,60 @@ div#start {
 				&:nth-child(even) {
 					background-color: rgba($thiColor, 0.2)
 				}
+				&.with-image {
+					height: calc(150px + 5vw);
+				}
 				>span.username {
 					width: calc(25% - 1vw - 5px);
 				}
 				>span.message {
 					width: calc(60% - 2vw - 5px);
+					>a {
+						color: adjust-color($thiColor, $blue: 100);
+						border-bottom: 1px solid adjust-color($thiColor, $blue: 100);
+						&:hover {
+							border-bottom: none;
+							background-image: url("
+							data:image/svg+xml;charset=utf8,
+							<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" viewBox=\"0 0 20 4\">
+								<style type=\"text/css\">
+									path {
+										animation:shift .3s linear infinite;
+									}
+									@keyframes shift {
+										from {
+											transform: translateX(0);
+										}
+										to {
+											transform: translateX(-50%);
+										}
+									}
+								</style>
+								<path fill=\"none\" stroke=\"#{adjust-color($thiColor, $blue: 100)}\" stroke-width=\"1\" d=\"M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3\"/>
+							</svg>");
+							background-position: 0 calc(100% - 1.5px);
+							background-size: auto 3px;
+							background-repeat: repeat-x;
+							padding-bottom: 3px;
+						}
+					}
+				}
+				>a.image {
+					position: absolute;
+					left: calc(25% + 3vw);
+					top: 5vw;
+					display: flex;
+					height: 8vw;
+					justify-content: center;
+					align-items: center;
+					>span {
+						position: absolute;
+						font-size: 4vw;
+						filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 3px 5px);
+					}
+					>img {
+						height: 100%;
+					}
 				}
 				>span.time {
 					width: 15%;
@@ -38,6 +87,7 @@ div#start {
 					text-align: center;
 					font-weight: 500;
 				}
+				
 			}
 		}
 		>div#footer {
@@ -69,17 +119,40 @@ div#start {
 				}
 				@include font;
 			}
-			>img#image {
+			>div#image-preview {
 				position: absolute;
 				right: 3vw;
 				bottom: 4vw;
-				width: 6vw;
+				width: 12vw;
+				display: flex;
+				flex-direction: column;
 				background-color: white;
 				padding: 1vw;
 				border-radius: 5px;
 				box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
+				>img {
+					width: 100%;
+				}
+				>div#image-options {
+					height: 4vw;
+					padding: 1vw;
+					display: flex;
+					justify-content: space-between;
+					>span {
+						position: relative;
+						margin: 0px;
+						bottom: 0px;
+						right: 0px;
+						&.mdi-check {
+							color: green;
+						}
+						&.mdi-close {
+							color: red;
+						}
+					}
+				}
 			}
-			>label, button {
+			>label, button, div#image-options>span {
 				position: absolute;
 				bottom: 0px;
 				right: 0px;
