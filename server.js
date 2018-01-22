@@ -68,7 +68,7 @@ const addToMessages = (req, res, message, messages) => {
 
 	while (messages.length > 8) {
 		if (messages[0].image) {
-			fs.unlink(message.image, () => {
+			fs.unlink(messages[0].image, () => {
 				messages.shift();
 			});
 		}
