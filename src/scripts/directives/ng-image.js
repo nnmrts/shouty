@@ -74,7 +74,9 @@ const ngImage = () => {
 			imageElement.addEventListener("load", () => {
 				const canvas = createCanvas(imageElement, options);
 
-				pica.resize(imageElement, canvas)
+				pica.resize(imageElement, canvas, {
+					alpha: true
+				})
 					.then((resizedCanvas) => {
 						console.log(resizedCanvas);
 						pica.toBlob(resizedCanvas, "image/png", 0.8).then((resizedBlob) => {
