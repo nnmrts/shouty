@@ -16,15 +16,8 @@ const ShoutyCfg = ($locationProvider, $stateProvider, $urlRouterProvider) => {
 		templateUrl: `${cwd}views/start.html`,
 		controller: "StartCtrl"
 	};
-	const loginState = {
-		name: "login",
-		url: `${cwd}login`,
-		templateUrl: `${cwd}views/login.html`,
-		controller: "LoginCtrl"
-	};
 
 	$stateProvider.state(startState);
-	$stateProvider.state(loginState);
 
 	$urlRouterProvider.otherwise("/");
 

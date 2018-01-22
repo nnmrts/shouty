@@ -11,26 +11,4 @@ div#header {
 	>h1 {
 		margin: 0px;
 	}
-	>nav {
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		width: 40%;
-		>a {
-			width: 7vw;
-			border: $secColor 1px solid;
-			border-radius: 5px;
-			padding: 0.5vw 1vw;
-			transition: all 0.4s;
-			display: flex;
-			justify-content: center;
-			&:hover {
-				border-radius: 15px;
-			}
-			&.active {
-				background-color: $secColor;
-				color: $priColor;
-			}
-		}
-	}
 }
