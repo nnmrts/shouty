@@ -6,9 +6,9 @@ const fs = require("fs");
 const sse = require("./sse.js");
 const mkdirp = require("mkdirp");
 
-mkdirp("./dist/images/", (err) => {
-	if (err) {
-		console.error(err);
+mkdirp("./dist/images/", (error) => {
+	if (error) {
+		throw error;
 	}
 });
 
@@ -77,9 +77,9 @@ const addToMessages = (req, res, message, messages) => {
 		}
 	}
 
-	return jsonfile.writeFile("./dist/messages.json", messages, (innerError) => {
-		if (innerError) {
-			console.log(innerError);
+	return jsonfile.writeFile("./dist/messages.json", messages, (writeFileError) => {
+		if (writeFileError) {
+			throw writeFileError;
 		}
 		connections.forEach((connection) => {
 			connection.sseSend(messages);
@@ -89,18 +89,20 @@ const addToMessages = (req, res, message, messages) => {
 	});
 };
 
-jsonfile.readFile("./dist/messages.json", (error, messages) => {
+jsonfile.readFile("./dist/messages.json", (readFileError, messages) => {
+	if (readFileError) {
+		throw readFileError;
+	}
+
 	const newMessages = messages;
 
 	app.post("/", (req, res) => {
 		const message = req.body;
 
-		console.log(message.image);
-
 		if (message.image) {
-			fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (err) => {
-				if (err) {
-					console.log(err);
+			fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (writeFileError) => {
+				if (writeFileError) {
+					throw writeFileError;
 				}
 
 				addToMessages(req, res, message, newMessages);
