@@ -7,9 +7,10 @@ import utils from "../utils.js";
  * @description
  * @param {any} $scope angular scope
  * @param {any} $http angular $http service
+ * @param {any} $timeout angular $timeout service
  * @ngInject
  */
-const StartCtrl = function($scope, $http) {
+const StartCtrl = function($scope, $http, $timeout) {
 	$scope.name = "start";
 
 	if (window.EventSource) {
@@ -21,9 +22,6 @@ const StartCtrl = function($scope, $http) {
 				message.chatTime = utils.dateToChatTime(new Date(message.time));
 			});
 
-			$("#chat").stop().animate({
-				scrollTop: $("#chat")[0].scrollHeight
-			}, 800);
 			$scope.$applyAsync();
 		}, false);
 	}
@@ -89,6 +87,16 @@ const StartCtrl = function($scope, $http) {
 		$scope.image = "";
 		$scope.closeImagePreview();
 	};
+
+	$scope.scrollChat = () => {
+		$timeout(() => {
+			$("#chat").stop().animate({
+				scrollTop: $("#chat")[0].scrollHeight
+			}, 400);
+		}, 400);
+	};
+
+	window.$ = $;
 
 	window[`${$scope.name}Scope`] = $scope;
 };

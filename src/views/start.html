@@ -1,6 +1,6 @@
 <div id="shoutbox" ng-enter="sendMessage()">
 	<div id="chat">
-		<div ng-class="['message-body', {'with-image': message.image}]" ng-repeat="message in messages">
+		<div ng-class="['message-body', {'with-image': message.image}]" ng-repeat="message in messages" ng-init="$last && scrollChat()">
 			<span class="username">{{message.username}}</span>
 			<span class="message" ng-bind-html="message.message | betterLinky"></span>
 			<a ng-if="message.image" class="image" ng-href="{{message.image}}" target="_blank">
