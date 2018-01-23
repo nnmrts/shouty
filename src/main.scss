@@ -6,7 +6,8 @@ body {
 	$secColor: white;
 	$thiColor: #292d2d;
 	$fouColor: #eaecec;
-	$headerHeight: 150px;
+	$headerHeight: 64px;
+	$mobile: "(orientation: portrait)";
 
 	@mixin font {
 		font-family: "Roboto", sans-serif;
@@ -21,6 +22,7 @@ body {
 	flex-direction: column;
 	background-color: $priColor;
 	color: $secColor;
+	overflow: hidden;
 	@include font;
 	*,
 	*::before,
@@ -40,6 +42,9 @@ body {
 		justify-content: center;
 		align-items: center;
 		padding: 5vw 15vw;
+		@media #{$mobile} {
+			padding: 0px;
+		}
 	}
 	> {
 		@import "styles/start",
