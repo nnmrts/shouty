@@ -78,7 +78,6 @@ const ngImage = () => {
 					alpha: true
 				})
 					.then((resizedCanvas) => {
-						console.log(resizedCanvas);
 						pica.toBlob(resizedCanvas, "image/png", 0.8).then((resizedBlob) => {
 							blobToDataUrl(resizedBlob).then((resizedDataUrl) => {
 								callback(resizedDataUrl, resizedBlob);
@@ -102,8 +101,6 @@ const ngImage = () => {
 		},
 		link(scope, element) {
 			element.bind("change", (evt) => {
-				console.log(evt);
-
 				scope.$apply(() => {
 					scope.ngImage = "data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJsb2FkZXItMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQogICAgIHdpZHRoPSI0MHB4IiBoZWlnaHQ9IjQwcHgiIHZpZXdCb3g9IjAgMCA1MCA1MCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTAgNTA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCiAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTQzLjkzNSwyNS4xNDVjMC0xMC4zMTgtOC4zNjQtMTguNjgzLTE4LjY4My0xOC42ODNjLTEwLjMxOCwwLTE4LjY4Myw4LjM2NS0xOC42ODMsMTguNjgzaDQuMDY4YzAtOC4wNzEsNi41NDMtMTQuNjE1LDE0LjYxNS0xNC42MTVjOC4wNzIsMCwxNC42MTUsNi41NDMsMTQuNjE1LDE0LjYxNUg0My45MzV6Ij4NCiAgICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVUeXBlPSJ4bWwiDQogICAgICBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iDQogICAgICB0eXBlPSJyb3RhdGUiDQogICAgICBmcm9tPSIwIDI1IDI1Ig0KICAgICAgdG89IjM2MCAyNSAyNSINCiAgICAgIGR1cj0iMC42cyINCiAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+DQogICAgPC9wYXRoPg0KICA8L3N2Zz4=";
 
@@ -112,11 +109,13 @@ const ngImage = () => {
 
 				const image = evt.target.files[0];
 
-				resizeImage(image, scope, (resizedDataUrl) => {
-					scope.$apply(() => {
-						scope.ngImage = resizedDataUrl;
+				if (image) {
+					resizeImage(image, scope, (resizedDataUrl) => {
+						scope.$apply(() => {
+							scope.ngImage = resizedDataUrl;
+						});
 					});
-				});
+				}
 			});
 		}
 	};
