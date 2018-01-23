@@ -28,6 +28,9 @@ div#start {
 				}
 				&.with-image {
 					height: calc(150px + 5vw);
+					>span.message {
+						margin-top: calc(150px + 1vw);
+					}
 				}
 				>span.username {
 					width: calc(25% - 1vw - 5px);
@@ -66,19 +69,23 @@ div#start {
 				}
 				>a.image {
 					position: absolute;
-					left: calc(25% + 3vw);
-					top: 5vw;
 					display: flex;
 					height: 8vw;
 					justify-content: center;
 					align-items: center;
+					left: calc(25% + 1vw);
+					width: calc(40% - 2vw - 5px);
+					height: 150px;
+					background-color: rgba(0, 0, 0, 0.1);
+					border-radius: 5px;
+					overflow: hidden;
 					>span {
 						position: absolute;
 						font-size: 4vw;
 						filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 3px 5px);
 					}
 					>img {
-						height: 100%;
+						width: 100%;
 					}
 				}
 				>span.time {
@@ -87,7 +94,6 @@ div#start {
 					text-align: center;
 					font-weight: 500;
 				}
-				
 			}
 		}
 		>div#footer {
@@ -168,6 +174,14 @@ div#start {
 				&[for="image"] {
 					right: 4vw;
 					overflow: hidden;
+					>span#image-name {
+						padding: 0vw 0.5vw;
+						margin: 0vw 0.5vw;
+						z-index: 2;
+						background-color: $secColor;
+						border-radius: 5px;
+						font-size: 1.4vw;
+					}
 					>input#image-upload {
 						cursor: inherit;
 						display: block;
@@ -180,6 +194,139 @@ div#start {
 						right: 0;
 						text-align: right;
 						top: 0;
+					}
+				}
+			}
+		}
+	}
+
+	@media #{$mobile} {
+		>div#shoutbox {
+			border-radius: 0px;
+			padding: 0px;
+			>div {
+				&#chat {
+					margin: 0px;
+					border-radius: 0px;
+					>div.message-body {
+						padding: 16px;
+						font-size: 20px;
+						>span {
+						&.username {
+							position: absolute;
+							font-size: 16px;
+							width: initial;
+							width: calc(100% - 112px);
+						}
+						&.time {
+							position: absolute;
+							font-size: 10px;
+							font-weight: normal;
+							right: 16px;
+							width: 64px;
+						}
+						}
+						&:nth-child(even) {
+						background-color: initial;
+						}
+						> {
+						span.message {
+							margin-top: 30px;
+							max-width: 100%;
+							width: initial;
+							background-color: white;
+							padding: 6px;
+							border-radius: 5px;
+						}
+						a.image {
+							left: 22px;
+							top: 52px;
+							width: calc(100% - 44px);
+							height: 150px;
+							background-color: rgba(0, 0, 0, 0.1);
+							border-radius: 5px;
+							overflow: hidden;
+						}
+						}
+						&.with-image {
+						height: initial;
+						min-width: calc(100% - 144px);
+						> span.message {
+							padding-top: 162px;
+							width: 100%;
+						}
+						}
+						> a.image > {
+						img {
+							width: 100%;
+    						height: initial;
+						}
+						span {
+							font-size: 32px;
+						}
+						}
+					}
+				}
+				&#footer {
+					flex-direction: column-reverse;
+					padding: 6px;
+					height: 90px;
+					> {
+						input {
+						&#username-input {
+							width: 100%;
+						}
+						&#message-input {
+							width: 100%;
+							margin-bottom: 6px;
+							padding: 5px 80px 5px 5px;
+						}
+						font-size: 20px;
+						padding: 5px 80px 5px 5px;
+						}
+						label {
+						background-color: white;
+						border-radius: 100px;
+						height: 64px;
+						width: 64px;
+						margin: 0px;
+						padding: 0px;
+						bottom: 14px;
+						right: 16px;
+						box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 5px;
+						font-size: 20px;
+						}
+					}
+					button, div#image-options > span {
+						background-color: white;
+						border-radius: 100px;
+						height: 64px;
+						width: 64px;
+						margin: 0px;
+						padding: 0px;
+						bottom: 14px;
+						right: 16px;
+						box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 5px;
+						font-size: 20px;
+					}
+					> label[for="image"], button[for="image"], div#image-options > span[for="image"] {
+						bottom: 86px;
+						right: 16px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: initial;
+						min-width: 64px;
+						padding: 22px;
+					}
+					> label[for="image"] > span, button[for="image"] > span, div#image-options > span[for="image"] > span {}
+					> label[for="image"] > span#image-name, button[for="image"] > span#image-name, div#image-options > span[for="image"] > span#image-name {
+						font-size: 12px;
+						margin: 0px;
+						padding: 0px 8px 0px 0px;
+					}
+					> div#image-preview {
+						display: none;
 					}
 				}
 			}
