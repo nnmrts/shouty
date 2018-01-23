@@ -93,12 +93,21 @@ gulp.task("babel", () => gulp.src(`${paths.dist}/shouty.js`)
 				"env",
 				{
 					targets: {
-						browsers: ">0.01%"
+						browsers: [
+							"> 0.01%"
+						]
 					}
 				}
 			]
+		],
+		plugins: [
+			[
+				"angularjs-annotate",
+				{
+					explicitOnly: true
+				}
+			]
 		]
-
 	}))
 	.pipe(gulp.dest(paths.dist)));
 
@@ -107,9 +116,9 @@ gulp.task("minify:js", () =>
 		.pipe(uglify({
 			warnings: true
 		}))
-		.pipe(gulp.dest(pkg.browser.replace("/shouty.js", ""))));
+		.pipe(gulp.dest(paths.dist)));
 
-gulp.task("build:js", gulp.series("rollup:browser", "babel"));
+gulp.task("build:js", gulp.series("rollup:browser", "babel", "minify:js"));
 gulp.task("dev:build:js", gulp.series("rollup:browser"));
 
 gulp.task("sass", () => gulp.src(`${paths.src}/main.scss`)
