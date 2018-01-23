@@ -109,11 +109,16 @@ const ngImage = () => {
 				const image = evt.target.files[0];
 
 				if (image) {
-					resizeImage(image, scope, (resizedDataUrl) => {
-						scope.$apply(() => {
-							scope.ngImage = resizedDataUrl;
+					if ((image.size / 1024) / 1024 < 50) {
+						resizeImage(image, scope, (resizedDataUrl) => {
+							scope.$apply(() => {
+								scope.ngImage = resizedDataUrl;
+							});
 						});
-					});
+					}
+					else {
+						window.alert("shouty only accepts images smaller than 50mb");
+					}
 				}
 			});
 		}
