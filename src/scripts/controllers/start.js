@@ -41,6 +41,7 @@ const StartCtrl = function($scope, $http, $timeout) {
 			$("#message-input").removeClass("ng-touched");
 			$scope.message = "";
 			$scope.image = "";
+			$("input#image-upload").val("");
 
 			$scope.$applyAsync();
 		});
