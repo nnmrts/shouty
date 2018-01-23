@@ -7,7 +7,6 @@ const pica = new Pica();
  *
  * @returns {object}
  * angular directive
- * @ngInject
  */
 const ngImage = () => {
 	/**

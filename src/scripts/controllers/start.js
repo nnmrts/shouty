@@ -8,9 +8,10 @@ import utils from "../utils.js";
  * @param {any} $scope angular scope
  * @param {any} $http angular $http service
  * @param {any} $timeout angular $timeout service
- * @ngInject
  */
 const StartCtrl = function($scope, $http, $timeout) {
+	"ngInject";
+
 	$scope.name = "start";
 
 	if (window.EventSource) {

@@ -10,6 +10,8 @@ const cwd = window.location.pathname;
  * @param {any} $urlRouterProvider ui.router $stateProvider
  */
 const ShoutyCfg = ($locationProvider, $stateProvider, $urlRouterProvider) => {
+	"ngInject";
+
 	const startState = {
 		name: "start",
 		url: `${cwd}`,

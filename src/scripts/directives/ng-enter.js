@@ -2,7 +2,6 @@
  * @name ngEnter
  * @returns {function}
  * directive function
- * @ngInject
  */
 const ngEnter = () => (scope, element, attrs) => {
 	element.bind("keydown keypress", (event) => {
