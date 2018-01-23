@@ -1,4 +1,4 @@
-<div id="shoutbox" ng-enter="sendMessage()">
+<div id="shoutbox" ng-enter="sendMessage()" ng-strict-di>
     <div id="chat">
         <div ng-class="['message-body', {'with-image': message.image}]" ng-repeat="message in messages" ng-init="$last && scrollChat()">
             <span class="username">{{message.username}}</span>
