@@ -8,7 +8,7 @@ const mkdirp = require("mkdirp");
 
 mkdirp("./dist/images/", (error) => {
 	if (error) {
-		throw error;
+		console.error(error);
 	}
 });
 
@@ -79,7 +79,7 @@ const addToMessages = (req, res, message, messages) => {
 
 	return jsonfile.writeFile("./dist/messages.json", messages, (writeFileError) => {
 		if (writeFileError) {
-			throw writeFileError;
+			console.error(writeFileError);
 		}
 		connections.forEach((connection) => {
 			connection.sseSend(messages);
@@ -91,7 +91,7 @@ const addToMessages = (req, res, message, messages) => {
 
 jsonfile.readFile("./dist/messages.json", (readFileError, messages) => {
 	if (readFileError) {
-		throw readFileError;
+		console.error(readFileError);
 	}
 
 	const newMessages = messages;
@@ -102,7 +102,7 @@ jsonfile.readFile("./dist/messages.json", (readFileError, messages) => {
 		if (message.image) {
 			fs.writeFile(`./dist/images/${message.image.name}`, message.image.file, "base64", (writeFileError) => {
 				if (writeFileError) {
-					throw writeFileError;
+					console.error(writeFileError);
 				}
 
 				addToMessages(req, res, message, newMessages);
@@ -112,10 +112,16 @@ jsonfile.readFile("./dist/messages.json", (readFileError, messages) => {
 			addToMessages(req, res, message, newMessages);
 		}
 	});
+});
 
-	app.get("/stream", (req, res) => {
+app.get("/stream", (req, res) => {
+	jsonfile.readFile("./dist/messages.json", (readFileError, messages) => {
+		if (readFileError) {
+			console.error(readFileError);
+		}
+
 		res.sseSetup();
-		res.sseSend(newMessages);
+		res.sseSend(messages);
 		connections.push(res);
 	});
 });
