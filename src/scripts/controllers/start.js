@@ -96,6 +96,8 @@ const StartCtrl = function($scope, $http, $timeout) {
 		}, 400);
 	};
 
+	$scope.imageInput = $("#image-upload");
+
 	window.$ = $;
 
 	window[`${$scope.name}Scope`] = $scope;
