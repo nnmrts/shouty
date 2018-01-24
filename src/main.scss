@@ -7,7 +7,7 @@ body {
 	$thiColor: #292d2d;
 	$fouColor: #eaecec;
 	$headerHeight: 64px;
-	$mobile: "(orientation: portrait)";
+	$mobile: "(max-width:800px)";
 
 	@mixin font {
 		font-family: "Roboto", sans-serif;
