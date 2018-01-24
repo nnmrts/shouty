@@ -1,4 +1,4 @@
-<div id="shoutbox" ng-enter="sendMessage()" ng-strict-di>
+<div id="shoutbox" ng-enter="sendMessage()">
     <div id="chat">
         <div ng-class="['message-body', {'with-image': message.image}]" ng-repeat="message in messages" ng-init="$last && scrollChat()">
             <span class="username">{{message.username}}</span>
@@ -19,7 +19,7 @@
 			<span id="image-name" ng-if="image">{{imageInput[0].files[0].name | truncateFilename:10}}</span>
 			<span class="mdi mdi-image"></span>
 
-			<input id="image-upload" ng-click="removeImage()" name="image" type="file" accept="image/*" ng-image="image" max-height="500" max-width="500" resize-quality="0.7">
+			<input id="image-upload" ng-click="removeImage()" name="image" type="file" accept="image/*" ng-image="image" max-height="500" max-width="500">
 		</label>
         <div id="image-preview" ng-show="imagePreviewShown">
             <img ng-src="{{image}}">
