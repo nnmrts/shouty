@@ -5,9 +5,12 @@ const cwd = window.location.pathname;
  * @description
  * config of the main angular module
  *
- * @param {any} $locationProvider ui.router $locationProvider
- * @param {any} $stateProvider ui.router $stateProvider
- * @param {any} $urlRouterProvider ui.router $stateProvider
+ * @param {any} $locationProvider
+ * ui.router $locationProvider
+ * @param {any} $stateProvider
+ * ui.router $stateProvider
+ * @param {any} $urlRouterProvider
+ * ui.router $stateProvider
  */
 const ShoutyCfg = ($locationProvider, $stateProvider, $urlRouterProvider) => {
 	"ngInject";

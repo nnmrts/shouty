@@ -31,6 +31,9 @@ app.enable("trust proxy");
 
 /**
  * @name addToMessages
+ * @description
+ * adds the received message to the messages array and saves that array to
+ * messages.json
  *
  * @param {object} req
  * server request object

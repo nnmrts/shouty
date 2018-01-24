@@ -2,41 +2,51 @@ import $ from "jquery";
 import utils from "../utils.js";
 
 /**
- * @ngdoc function
  * @name StartCtrl
  * @description
- * @param {any} $scope angular scope
- * @param {any} $http angular $http service
- * @param {any} $timeout angular $timeout service
+ * the main controller of the app
+ * @param {any} $scope
+ * angular scope
+ * @param {any} $http
+ * angular $http service
+ * @param {any} $timeout
+ * angular $timeout service
  */
 const StartCtrl = function($scope, $http, $timeout) {
 	"ngInject";
 
+	// init values
 	$scope.name = "start";
-
-	if (window.EventSource) {
-		const source = new EventSource("/stream");
-
-		source.addEventListener("message", (e) => {
-			$scope.messages = JSON.parse(e.data);
-			$scope.messages.forEach((message) => {
-				message.chatTime = utils.dateToChatTime(new Date(message.time));
-			});
-
-			$scope.$applyAsync();
-		}, false);
-	}
-	else {
-		console.log("Your browser doesn't support SSE");
-	}
-
-
 	$scope.username = "";
 	$scope.message = "";
 	$scope.image = "";
+	$scope.imageInput = $("#image-upload");
+
+	// ui functions
+	$scope.openImagePreview = () => {
+		$scope.imagePreviewShown = true;
+	};
+
+	$scope.closeImagePreview = () => {
+		$scope.imagePreviewShown = false;
+	};
+
+	$scope.removeImage = () => {
+		$scope.image = "";
+		$scope.closeImagePreview();
+	};
+
+	$scope.scrollChat = () => {
+		$timeout(() => {
+			$("#chat").stop().animate({
+				scrollTop: $("#chat")[0].scrollHeight
+			}, 400);
+		}, 400);
+	};
 
 	$scope.test = () => !$("#footer>input").hasClass("ng-empty");
 
+	// functions for sending messages
 	$scope.postMessage = (message) => {
 		$http.post("/", message).then(() => {
 			$("#message-input").removeClass("ng-touched");
@@ -77,32 +87,18 @@ const StartCtrl = function($scope, $http, $timeout) {
 		}
 	};
 
-	$scope.openImagePreview = () => {
-		$scope.imagePreviewShown = true;
-	};
 
-	$scope.closeImagePreview = () => {
-		$scope.imagePreviewShown = false;
-	};
+	// get stream of messages
+	const source = new EventSource("/stream");
 
-	$scope.removeImage = () => {
-		$scope.image = "";
-		$scope.closeImagePreview();
-	};
+	source.addEventListener("message", (e) => {
+		$scope.messages = JSON.parse(e.data);
+		$scope.messages.forEach((message) => {
+			message.chatTime = utils.dateToChatTime(new Date(message.time));
+		});
 
-	$scope.scrollChat = () => {
-		$timeout(() => {
-			$("#chat").stop().animate({
-				scrollTop: $("#chat")[0].scrollHeight
-			}, 400);
-		}, 400);
-	};
-
-	$scope.imageInput = $("#image-upload");
-
-	window.$ = $;
-
-	window[`${$scope.name}Scope`] = $scope;
+		$scope.$applyAsync();
+	}, false);
 };
 
 export default StartCtrl;

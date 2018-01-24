@@ -1,5 +1,7 @@
 /**
  * @name betterLinky
+ * @description
+ * converts every url in a given text to clickable links
  *
  * @returns {string}
  * text with clickable links
@@ -12,6 +14,7 @@ const betterLinky = () => {
 
 	return (text) => {
 		const newText = text.replace(emailPattern, "<a href=\"mailto:$&\">$&</a>").replace(pattern, (match, p1, p2, p3) => {
+			// if match doesn't already include protocol, insert it
 			if (!p2.includes("http") || !p2.includes("ftp")) {
 				return `${p1}<a href="http://${p2}" target="_blank">${p2}</a>${p3}`;
 			}

@@ -22,12 +22,15 @@ const ShoutyApp = angular
 	])
 	.config(ShoutyCfg);
 
+// this attaches all controllers, filters, etc. to the angular module
 Object.keys(map).forEach((key) => {
 	Object.keys(map[key]).forEach((name) => {
 		ShoutyApp[key.slice(0, -1)](name, map[key][name]);
 	});
 });
 
+
+// fix for vh unit on mobile devices
 setTimeout(() => {
 	const viewheight = $(window).height();
 	const viewwidth = $(window).width();

@@ -10,7 +10,7 @@
 	"scripts": {
 		"start": "node server.js"
 	},
-	"description": "Example shoutbox application",
+	"description": "a simple shoutbox application",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/nnmrts/shouty.git"

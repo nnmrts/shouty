@@ -1,5 +1,9 @@
 /**
  * @name truncateFilename
+ * @description
+ * shortens a given string with a file extension to a given maximum
+ * character count, without removing the file extension while inserting
+ * a given ellipsis before it
  *
  * @param {string} filename
  * filename
@@ -15,6 +19,7 @@ const truncateFilename = () => (filename, max, ellipsis = "…") => {
 		if (/\./.test(filename.slice(-6))) {
 			const extension = filename.replace(/(.*)\./, "");
 
+			// only truncate if filename is longer than maximum
 			if (filename.length > max) {
 				return `${filename.substr(0, (max - extension.length))}${ellipsis}.${extension}`;
 			}

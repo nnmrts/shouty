@@ -1,5 +1,8 @@
 /**
  * @name ngEnter
+ * @description
+ * executes a given function when pressing enter in the container this
+ * directive is attached on
  * @returns {function}
  * directive function
  */
