@@ -2,9 +2,6 @@
 
 const gulp = require("gulp");
 
-const path = require("path");
-const fs = require("fs");
-
 const taskTime = require("gulp-total-task-time");
 const del = require("del");
 const eslint = require("gulp-eslint");
@@ -21,16 +18,10 @@ const vinylPaths = require("vinyl-paths");
 const autoprefixer = require("gulp-autoprefixer");
 const cleanCSS = require("gulp-clean-css");
 const htmlbeautify = require("gulp-html-beautify");
-const nodeCleanup = require("node-cleanup");
 const gutil = require("gulp-util");
 const liveServer = require("live-server");
-const yargs = require("yargs");
 const git = require("gulp-git");
-const semver = require("semver");
 const _ = require("lodash");
-const jeditor = require("gulp-json-editor");
-const GitHub = require("github-api");
-const childProcess = require("child_process");
 const builtins = require("rollup-plugin-node-builtins");
 const globals = require("rollup-plugin-node-globals");
 
@@ -246,54 +237,6 @@ gulp.task("server", () => {
 
 gulp.task("dev", gulp.series("dev:build", "watch"));
 
-// --------------------------------------------------------------
-// --------------------------------------------------------------
-// --------------------------------------------------------------
-
-const branch = yargs.argv.branch || "master";
-
-const rootDir = `${path.resolve(yargs.argv.rootDir || "./")}/`;
-
-/**
- * @returns {string} current version
- */
-const currVersion = () => JSON.parse(fs.readFileSync(`${rootDir}package.json`)).version;
-
-/**
- * @returns {(string|undefined)} release type
- */
-const preid = () => {
-	if (yargs.argv.alpha) {
-		return "alpha";
-	}
-	if (yargs.argv.beta) {
-		return "beta";
-	}
-	if (yargs.argv.RC) {
-		return "RC";
-	}
-	if (yargs.argv["pre-release"]) {
-		return yargs.argv["pre-release"];
-	}
-	return undefined;
-};
-
-/**
- * @returns {string} release type
- */
-const versioning = () => {
-	if (preid()) {
-		return "prerelease";
-	}
-	if (yargs.argv.minor) {
-		return "minor";
-	}
-	if (yargs.argv.major) {
-		return "major";
-	}
-	return "patch";
-};
-
 gulp.task("commit:build", cb =>
 	gulp.src("./dist/**/*.*").pipe(git.add()).pipe(git.commit("Build: generated dist files", {
 		args: "-s -S",
@@ -305,143 +248,6 @@ gulp.task("commit:build", cb =>
 
 		return cb();
 	})));
-
-gulp.task("bump", (cb) => {
-	const newVersion = semver.inc(currVersion(), versioning(), preid());
-
-	git.pull("origin", branch, {
-		args: "--rebase",
-		cwd: rootDir
-	});
-
-	const versionsToBump = _.map([
-		"package.json",
-		"bower.json"
-	], fileName => rootDir + fileName);
-
-	const commitMessage = `Build: Bumps version to v${newVersion}`;
-
-	gulp.src(versionsToBump, {
-		cwd: rootDir
-	})
-		.pipe(jeditor({
-			version: newVersion
-		}))
-		.pipe(gulp.dest("./", {
-			cwd: rootDir
-		}))
-		.pipe(git.commit(commitMessage, {
-			cwd: rootDir
-		}))
-		.on("end", () => {
-			git.push(
-				"origin", branch, {
-
-					cwd: rootDir
-				}, (err) => {
-					if (err) {
-						return cb(err);
-					}
-
-					return cb();
-				}
-			);
-		});
-});
-
-gulp.task("tag", (cb) => {
-	const tag = `v${currVersion()}`;
-
-	const message = tag;
-
-	git.tag(
-		tag, message, {
-			signed: "true",
-			cwd: rootDir
-		}, (err) => {
-			if (err) {
-				return cb(err);
-			}
-			return cb();
-		}
-	);
-});
-
-gulp.task("push", (cb) => {
-	git.push(
-		"origin", branch, {
-			args: "--tags",
-			cwd: rootDir
-		}, cb
-	);
-});
-
-gulp.task("npm-publish", done => childProcess.spawn("npm", [
-	"publish"
-], {
-	stdio: "inherit"
-}).on("close", done));
-
-gulp.task("github", (cb) => {
-	const GitHubAuth = JSON.parse(fs.readFileSync(`${rootDir}.githubauth`));
-
-	const gh = new GitHub(GitHubAuth);
-
-	const repo = gh.getRepo("nnmrts", "shouty");
-
-	repo.listTags().then(() => {
-		const tagName = `v${currVersion()}`;
-
-		const targetCommitish = branch;
-
-		const name = tagName;
-
-		const body = "browser: [shouty.js](https://raw.githubusercontent.com/nnmrts/shouty/%t/dist/browser/shouty.js)\nnpm: [shouty.js](https://raw.githubusercontent.com/nnmrts/shouty/%t/dist/shouty.js)\nes module: [shouty.js](https://raw.githubusercontent.com/nnmrts/shouty/%t/dist/module/shouty.js)".replace(/%t/g, tagName);
-
-		const prerelease = versioning() === "prerelease";
-
-		return repo.createRelease({
-			tag_name: tagName,
-			target_commitish: targetCommitish,
-			name,
-			body,
-			draft: false,
-			prerelease
-		}).then(() => {}).catch((e) => {
-			gutil.log(e);
-
-			cb(e);
-		});
-	}).catch((e) => {
-		cb(e);
-	});
-});
-
-gulp.task("release", gulp.series(
-	"build", "commit:build", "bump", "tag", "push", "npm-publish"
-));
-
-let cleanSignal;
-
-gulp.task("kill-process", () =>
-	process.kill(process.pid, cleanSignal));
-
-nodeCleanup((exitCode, signal) => {
-	if (signal) {
-		cleanSignal = signal;
-
-		// server.stop();
-
-		gulp.series("clean:tmp", "kill-process");
-
-		nodeCleanup.uninstall(); // don't call cleanup handler again
-		return false;
-	}
-	return undefined;
-}, {
-	ctrl_C: "{^C}",
-	uncaughtException: "Uh oh. Look what happened:"
-});
 
 
 gulp.task("default", gulp.series("build", "commit:build"));
