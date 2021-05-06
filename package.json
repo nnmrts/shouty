@@ -47,7 +47,7 @@
 		"gulp-uglify": "^3.0.0",
 		"gulp-util": "^3.0.8",
 		"live-server": "^1.2.0",
-		"lodash": "^4.17.4",
+		"lodash": "^4.17.21",
 		"rollup": "^0.54.1",
 		"rollup-plugin-commonjs": "^8.2.6",
 		"rollup-plugin-json": "^2.3.0",
